@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isLightMode }) => {
                 </Link>
                 <div onClick={onToggleTheme}>
                     <Image 
-                        src={isLightMode ? "/assets/darkMode.png" : "/assets/lightMode.png"}
+                        src={isLightMode ? "/assets/darkMode.svg" : "/assets/lightMode.svg"}
                         alt={isLightMode ? "Dark Mode" : "Light Mode"}
                         width={28}
                         height={28}
@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isLightMode }) => {
                         </li>
                     </ul>
                     <a href="https://www.linkedin.com/in/codymsims/" target="_blank" rel="noopener noreferrer">
-                        <Image className={styles.icon} src="/assets/linkedin.png" alt="LinkedIn profile" width={28} height={28}/>
+                        <Image className={styles.icon} src="/assets/linkedin.svg" alt="LinkedIn profile" width={28} height={28}/>
                     </a>
                 </div>
             </nav>

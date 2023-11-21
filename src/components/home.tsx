@@ -9,19 +9,19 @@ import { useRouter } from "next/router";
 const workCards = [
     {
         Role: "Software Engineer",
-        Logo: "/assets/microsoft.png",
+        Logo: "/assets/microsoft.svg",
         Company: "Intern at Microsoft",
         Description: "Redesigned and implemented new features for a popular internal tool",
     },
     {
         Role: "Cloud Engineer",
-        Logo: "/assets/cisco.png",
+        Logo: "/assets/cisco.svg",
         Company: "Intern at Cisco",
         Description: "Created a Cost Metrics Dashboard and created new REST APIs",
     },
     {
         Role: "Teaching Assistant",
-        Logo: "/assets/brown.png",
+        Logo: "/assets/brown.svg",
         Company: "TA at Brown University",
         Description: "Acted as a mentor and held debugging sessions for Intro to Software Engineering",
     },
@@ -29,13 +29,13 @@ const workCards = [
 
 const projectCards = [
     {
-        img: "/assets/iterative.jpg",
+        img: "/assets/iterative.webp",
         title: "Iterative Design",
         description: "Utilized iterative design to create a Point-Of-Sale System",
         link: "https://hungrybison102.github.io/iterative-design/"
     },
     {
-        img: "/assets/pokemon.jpg",
+        img: "/assets/pokemon.webp",
         title: "Pokemon",
         description: "Another description...",
         link: "https://quirkyturtle190.github.io/Development/"
@@ -72,7 +72,7 @@ const Home: React.FC = () => {
     return (
         <Stack className={styles.containerHomeDiv}>
             <div ref={imageRef} className={styles.backgroundImage}>
-                <Image src="/assets/caving.jpg" alt="abseiling a cave" width={200} height={100} layout="responsive" />
+                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100} layout="responsive" />
             </div>
             <Bio/>
             <Stack className={styles.containerHome}>
@@ -127,7 +127,7 @@ function AboutMe() {
                       </h2>
                   </button>
                   <Link href="https://www.linkedin.com/in/codymsims/" passHref>
-                      <Image src="/assets/linkedin.png" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
+                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
                   </Link>
               </Stack>
           </Stack>
