@@ -70,7 +70,7 @@ const Home: React.FC = () => {
     return (
         <Stack className={styles.containerHomeDiv}>
             <div ref={imageRef} className={styles.backgroundImage}>
-                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100}/>
+                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100} layout="responsive" />
             </div>
             <Bio/>
             <Stack className={styles.containerHome}>
@@ -101,7 +101,7 @@ function AboutMe() {
 
   return (
       <Stack className={styles.containerAboutMe}>
-          <Image src="/assets/portrait.png" alt="Self-Portrait" className={`${styles.imgPortrait} ${styles.itemHalfWidth}`} width={100} height={100} />
+          <Image src="/assets/portrait.png" alt="Self-Portrait" className={`${styles.imgPortrait} ${styles.itemHalfWidth}`} width={100} height={100} layout="responsive" />
           <Stack className={`${styles.containerAboutMeBio} ${styles.itemHalfWidth}`}>
                 <h2>
                     Hey, I&apos;m Cody
@@ -125,7 +125,7 @@ function AboutMe() {
                       </h2>
                   </button>
                   <Link href="https://www.linkedin.com/in/codymsims/" passHref>
-                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} />
+                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
                   </Link>
               </Stack>
           </Stack>
@@ -144,7 +144,7 @@ function WorkExperience() {
           <Stack tokens={{ childrenGap: "12px" }} className={styles.workCard}>
               <h3>{card.Role}</h3>
               <p className={styles.workCardTitle}>{card.Company}</p>
-              <Image src={card.Logo} alt="Company Logo" width={200} height={100} />
+              <Image src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
           </Stack>
       </Link>
   ));
@@ -166,7 +166,7 @@ function Projects() {
           <Stack key={index} className={styles.projectCard} tokens={{ childrenGap: "24px" }}>
               <h3>{card.title}</h3>
               <Link href={url} passHref>
-                  <Image src={card.img} alt="Company Logo" width={200} height={100} />
+                  <Image src={card.img} alt="Company Logo" width={200} height={100} layout="responsive" />
               </Link>
           </Stack>
       );
