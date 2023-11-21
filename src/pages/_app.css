@@ -1,0 +1,47 @@
+/* Define color variables for dark and light modes */
+:root {
+  --background-color-dark: #0E0103;
+  --background-color-light-dark: #121212;
+  --text-color-dark: rgb(171, 171, 171);
+  --background-color-light: rgb(237, 237, 237);
+  --text-color-light: rgb(54, 0, 0);
+
+  --header-about-me-light: #4d685d ;
+  --header-about-me-dark: #9ac0b0;
+  --text-about-me-light: #7c5535;
+  --text-about-me-dark: #cca98d;
+}
+
+.darkMode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+  font-family: Arial, sans-serif;
+}
+
+.darkMode p,
+.darkMode h1,
+.darkMode h2,
+.darkmode h3,
+.darkmode h4 {
+  color: var(--text-color-dark);
+}
+
+/* Light theme */
+.lightMode {
+  --header-about-me-dark: var(--header-about-me-light);
+  --text-about-me-dark: var(--text-about-me-light);
+  background-color: var(--background-color-light);
+  --text-color-dark: var(--text-color-light);
+  color: var(--text-color-light);
+}
+
+.lightMode p,
+.lightMode h1,
+.lightMode h2,
+.lightMode h3,
+.lightMode h4 {
+  --text-color-dark: var(--text-color-light);
+  color: var(--text-color-light);
+}
+
+

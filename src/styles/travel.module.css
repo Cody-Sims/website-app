@@ -1,0 +1,15 @@
+#regionsDiv {
+    min-height: 80vh;
+    height: 80vh;
+    max-height: 80vh;
+}
+
+#regionsDiv path {
+    cursor: pointer;
+  }
+
+.travelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

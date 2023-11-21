@@ -1,0 +1,71 @@
+/* Styling for the header */
+.navbar .navLinkH1 {
+  margin-right: auto; /* Pushes the header to the left */
+  font-size: 1.5em;
+  font-family: cursive;
+  color: #333;
+}
+
+.containerNavbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Generic styling for the navbar */
+.navbar {
+  display: flex; /* Use flexbox for easy alignment */
+  justify-content: space-between; /* Space between header and links */
+  align-items: center; /* Vertically align items */
+  padding: 10px 20px; /* Some padding for better look */
+  border-bottom: 3px double #544c4c;
+  gap: 15px;
+}
+
+/* Styling for the nav links */
+.navbar .navbarNav {
+  display: flex; /* Use flexbox for the nav links too */
+  margin-left: auto;
+  padding: 0 10px;
+  gap: 15px; /* Some space between the links */
+}
+
+.navbar .navLink {
+  text-decoration: none; /* Remove underline */
+  color: #545b63; /* Default bootstrap link color */
+  transition: color 0.3s; /* Smooth color transition for hover effect */
+}
+
+.navbar .navLink:hover {
+  color: #0056b3; /* Darker shade for hover effect */
+}
+
+.icon {
+  margin: 0 1%;
+  width: 28px;
+  height: 28px;
+}
+
+.collapse {
+  /* This ensures that the collapsed menu is hidden by default */
+  display: none;
+
+  /* Style when navbar is expanded (e.g., on smaller screens) */
+  @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #fff; /* Background color for the collapsed menu */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a "popup" effect */
+      position: absolute;
+      top: 100%; /* Position right below the navbar */
+      left: 0;
+      z-index: 1001; /* Ensures it's above other content */
+  }
+}
+
+.navbar-toggler.collapsed + .collapse {
+  /* Styles when the toggler is in collapsed state */
+  display: none;
+}
