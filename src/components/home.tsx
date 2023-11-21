@@ -44,12 +44,10 @@ const projectCards = [
 
 
 const Home: React.FC = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const imageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 3000);
-
         const handleScroll = () => {
             const scrollPos = window.scrollY / window.innerHeight;
             const opacity = 1 - (scrollPos * 1.5);
@@ -62,17 +60,17 @@ const Home: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            clearTimeout(timer);
         };
     }, []);
 
     if (isLoading) {
         return <LoadingScreen />;
     }
+
     return (
         <Stack className={styles.containerHomeDiv}>
             <div ref={imageRef} className={styles.backgroundImage}>
-                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100} layout="responsive" />
+                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100}/>
             </div>
             <Bio/>
             <Stack className={styles.containerHome}>
@@ -103,7 +101,7 @@ function AboutMe() {
 
   return (
       <Stack className={styles.containerAboutMe}>
-          <Image src="/assets/portrait.png" alt="Self-Portrait" className={`${styles.imgPortrait} ${styles.itemHalfWidth}`} width={100} height={100} layout="responsive" />
+          <Image src="/assets/portrait.png" alt="Self-Portrait" className={`${styles.imgPortrait} ${styles.itemHalfWidth}`} width={100} height={100} />
           <Stack className={`${styles.containerAboutMeBio} ${styles.itemHalfWidth}`}>
                 <h2>
                     Hey, I&apos;m Cody
@@ -127,7 +125,7 @@ function AboutMe() {
                       </h2>
                   </button>
                   <Link href="https://www.linkedin.com/in/codymsims/" passHref>
-                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
+                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} />
                   </Link>
               </Stack>
           </Stack>
@@ -146,7 +144,7 @@ function WorkExperience() {
           <Stack tokens={{ childrenGap: "12px" }} className={styles.workCard}>
               <h3>{card.Role}</h3>
               <p className={styles.workCardTitle}>{card.Company}</p>
-              <Image src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
+              <Image src={card.Logo} alt="Company Logo" width={200} height={100} />
           </Stack>
       </Link>
   ));
@@ -168,7 +166,7 @@ function Projects() {
           <Stack key={index} className={styles.projectCard} tokens={{ childrenGap: "24px" }}>
               <h3>{card.title}</h3>
               <Link href={url} passHref>
-                  <Image src={card.img} alt="Company Logo" width={200} height={100} layout="responsive" />
+                  <Image src={card.img} alt="Company Logo" width={200} height={100} />
               </Link>
           </Stack>
       );
