@@ -1,7 +1,7 @@
 // Import statements
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from './styles.travel.module.css';
+import styles from '../styles.travel.module.css';
 
 // Add a prop for the theme
 type TravelProps = {
