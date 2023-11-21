@@ -1,4 +1,4 @@
-.loading-screen {
+.loadingScreen {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@
     font-size: 20px;
   }
   
-  .loading-circle {
+  .loadingCircle {
     border: 5px solid #f3f3f3; /* Light grey border for the loader */
     border-top: 5px solid #3498db; /* Blue color for the loader */
     border-radius: 50%;

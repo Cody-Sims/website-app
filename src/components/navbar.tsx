@@ -41,17 +41,17 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isLightMode }) => {
                 <div className={`${styles.collapse} navbar-collapse`} id="navbarSupportedContent">
                     <ul className={`${styles.navbarNav} navbar-nav ml-auto`}>
                         <li className={styles.navItem}>
-                            <Link href="/dj" passHref legacyBehavior>
+                            <Link href="/" passHref legacyBehavior>
                                 <a className={`${styles.navLink} ${isActive('/dj') ? styles.active : ''}`}>DJ</a>
                             </Link>
                         </li>
                         <li className={styles.navItem}>
-                            <Link href="/travel" passHref legacyBehavior>
+                            <Link href="/" passHref legacyBehavior>
                                 <a className={`${styles.navLink} ${isActive('/travel') ? styles.active : ''}`}>Travel</a>
                             </Link>
                         </li>
                         <li className={styles.navItem}>
-                            <Link href="/blog" passHref legacyBehavior>
+                            <Link href="/" passHref legacyBehavior>
                                 <a className={`${styles.navLink} ${isActive('/blog') ? styles.active : ''}`}>Blog</a>
                             </Link>
                         </li>
