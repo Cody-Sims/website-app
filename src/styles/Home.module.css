@@ -103,8 +103,14 @@
 .projectCardContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding: 10% 20%;
   gap: 72px;
+}
+
+.projectContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .projectCardContainer h3 {
@@ -224,7 +230,7 @@
     margin: 72px 0;
   }
 
-  
+
   .workCard {
     margin: 24px 0 0 0;
   }
