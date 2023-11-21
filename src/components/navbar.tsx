@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+
 type NavbarProps = {
     onToggleTheme: () => void;
     isLightMode: boolean;
