@@ -4,7 +4,9 @@ import { Analytics } from '@vercel/analytics/react';
 export default function Document() {
   return (
     <Html>
-      <Head />
+      <Head>
+        <link rel="shortcut icon" href="favicon.ico" />
+      </Head>
       <body>
         <Main />
         <NextScript />

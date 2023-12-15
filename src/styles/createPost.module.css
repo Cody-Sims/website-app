@@ -1,0 +1,34 @@
+.blogSection {
+    background-color: rgb(29, 29, 29);
+    min-height: 100vh;
+}  
+
+.containerPostInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.textContainer {
+    width: 100%; /* Adjust as needed */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    flex-wrap: 'off'; /* Prevent text wrapping */
+    text-align: center;
+}
+
+
+.containerCreatePost input {
+    background-color: rgb(29, 29, 29);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f2f2f2;
+}
+
+.containerCreatePost textarea {
+    background-color: rgb(29, 29, 29);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f2f2f2;
+    resize: none;
+    min-height: 32px;
+    height: auto;
+    overflow: hidden;
+}

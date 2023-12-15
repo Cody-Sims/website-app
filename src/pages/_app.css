@@ -1,38 +1,58 @@
-/* Define color variables for dark and light modes */
+/* Define default color variables */
+:root {
+  --background-color: var(--background-color-dark); /* Default to dark mode colors */
+  --foreground-color: var(--foreground-color-dark); /* Default to dark mode colors */
+  --text-color: var(--text-color-dark);
+  --header-about-me: var(--header-about-me-dark);
+  --text-about-me: var(--text-about-me-dark);
+}
+
+/* Dark theme color variables */
 :root {
   --background-color-dark: #0E0103;
-  --background-color-light-dark: #121212;
+  --foreground-color-dark: #121212;
   --text-color-dark: rgb(171, 171, 171);
-  --background-color-light: rgb(237, 237, 237);
-  --text-color-light: rgb(54, 0, 0);
-
-  --header-about-me-light: #4d685d ;
   --header-about-me-dark: #9ac0b0;
-  --text-about-me-light: #7c5535;
   --text-about-me-dark: #cca98d;
 }
 
+/* Light theme color variables */
+:root {
+  --background-color-light: rgb(237, 237, 237);
+  --foreground-color-light: rgb(207, 207, 207);
+  --text-color-light: rgb(49, 49, 49);
+  --header-about-me-light: #4d685d;
+  --text-about-me-light: #7c5535;
+}
+
+/* Dark theme styles */
 .darkMode {
-  background-color: var(--background-color-dark);
-  color: var(--text-color-dark);
-  font-family: Arial, sans-serif;
+  --background-color: var(--background-color-dark);
+  --foreground-color: var(--foreground-color-dark);
+  --text-color: var(--text-color-dark);
+  --header-about-me: var(--header-about-me-dark);
+  --text-about-me: var(--text-about-me-dark);
+
+  background-color: var(--background-color);
 }
 
 .darkMode p,
 .darkMode h1,
 .darkMode h2,
-.darkmode h3,
-.darkmode h4 {
+.darkMode h3,
+.darkMode h4 {
   color: var(--text-color-dark);
 }
 
-/* Light theme */
+/* Light theme styles */
 .lightMode {
-  --header-about-me-dark: var(--header-about-me-light);
-  --text-about-me-dark: var(--text-about-me-light);
-  background-color: var(--background-color-light);
-  --text-color-dark: var(--text-color-light);
-  color: var(--text-color-light);
+  --background-color: var(--background-color-light);
+  --foreground-color: var(--foreground-color-light);
+  --text-color: var(--text-color-light);
+  --header-about-me: var(--header-about-me-light);
+  --text-about-me: var(--text-about-me-light);
+
+  background-color: var(--background-color);
 }
 
 .lightMode p,
@@ -40,8 +60,13 @@
 .lightMode h2,
 .lightMode h3,
 .lightMode h4 {
-  --text-color-dark: var(--text-color-light);
   color: var(--text-color-light);
 }
 
-
+/* Styles for Google Visualization Tooltip */
+.google-visualization-tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

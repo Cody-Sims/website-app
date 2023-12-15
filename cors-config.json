@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["http://localhost:3000", "https://cody-sims.com"],
+      "responseHeader": ["Content-Type"],
+      "method": ["GET", "HEAD", "DELETE", "POST", "PUT"],
+      "maxAgeSeconds": 3600
+    }
+]  

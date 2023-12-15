@@ -13,10 +13,6 @@
   margin: 0;
 }
 
-.containerHomeDiv {
-  background-color: inherit;
-  color: inherit;
-}
 
 /* Container Styles */
 .containerHome {
@@ -25,7 +21,7 @@
 
 .containerHome {
   text-decoration: none;
-  color: var(--text-color-dark);
+  color: var(--text-color);
 }
 
 .containerWork {
@@ -61,13 +57,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.3s ease;
-  position: relative;
+  perspective: 1000px
+}
+.workCardInner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.workCard:hover {
-  transform: translate(-15px, -15px);
-  box-shadow: 5px 5px 10px rgba(1, 21, 7, 0.5);
+.workCard:hover .workCardInner {
+  transform: rotateY(180deg);
+}
+
+.workCardFront, .workCardBack {
+  width: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.workCardBack {
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .workCard img {
@@ -79,13 +100,13 @@
 .workCard h3 {
   font-size: 24px;
   margin-top: 0;
-  color: var(--text-color-dark);
+  color: var(--text-color);
 }
 
 .workCard p, .workCardTitle {
   font-size: 18px;
   margin-bottom: 0;
-  color: var(--text-color-dark);
+  color: var(--text-color);
 }
 
 .workCardTitle {
@@ -104,9 +125,11 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 10% 20%;
+  text-align: center;
+  padding: 10% 25%;
   gap: 72px;
 }
+
 
 .projectContainer {
   display: flex;
@@ -116,6 +139,10 @@
 .projectCardContainer h3 {
   display: flex;
   justify-content: center;
+}
+
+.stackItem {
+  width: 50%
 }
 
 /* Bio Container Styles */
@@ -141,16 +168,16 @@
 }
 /* About Me Container Styles */
 .containerAboutMeBio p {
-  color: var(--text-about-me-dark);
+  color: var(--text-about-me);
   font-size: 24px;
 }
 
 .containerAboutMeBio h1 {
-  color: var(--text-color-dark);
+  color: var(--text-color);
 }
 
 .containerAboutMeBio h2 {
-  color: var(--header-about-me-dark);
+  color: var(--header-about-me);
   font-size: 48px;
 }
 
@@ -165,13 +192,13 @@
   background-color: inherit;
   border: 1px solid rgb(255, 255, 255);
   border-radius: 12px;
-  border-color: var(--text-color-dark);
+  border-color: var(--text-color);
   padding: 12px;
 }
 
 .resumeBut h2 {
   margin: 0; /* Remove default margins from h2 to control button size */
-  color: var(--text-color-dark);
+  color: var(--text-color);
 }
 
 .resumeBut:hover h2 {
@@ -254,6 +281,7 @@
   }
   .containerBio h1 {
     font-size: 1.5em;
+    padding: 0;
   }
 
   .containerBio p {
@@ -306,7 +334,8 @@
   }
 
   .imgPortrait {
-    min-width: 50%
+    min-width: 50%;
+    max-width: 75%;
   }
 
   .containerWork h2 {
@@ -314,7 +343,7 @@
   }
 
   .backgroundImage {
-    height: 50vh;
+    min-height: 40vh;
     width: 100%; /* Ensure the image takes the full width of its container */
     object-fit: cover;
     object-position: center; /* Center the image */

@@ -1,15 +1,54 @@
-#regionsDiv {
+.container h1 {
+    font-size: 3vw;
+    text-align: center;
+}
+.container h2 {
+    font-size: 2vw;
+    text-align: center;
+}
+
+.travelContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 5vh;
+    height: 100vh;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.regionsDiv {
     min-height: 80vh;
     height: 80vh;
     max-height: 80vh;
 }
 
-#regionsDiv path {
+.regionsDiv path {
     cursor: pointer;
-  }
+}
 
-.travelContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.regionsDiv path {
+    cursor: pointer;
+}
+
+/* Tablet-specific styles */
+@media (min-width: 724) and (max-width: 1025px) {
+    .regionsDiv {
+        /* Reset height to default and set width */
+        min-height: auto;
+        height: auto;
+        max-height: auto;
+        min-width: 100vw;
+    }
+}
+
+/* Tablet-specific styles */
+@media (max-width: 723px) {
+    .regionsDiv {
+        /* Reset height to default and set width */
+        min-height: auto;
+        height: auto;
+        max-height: auto;
+        min-width: 200vw;
+    }
 }

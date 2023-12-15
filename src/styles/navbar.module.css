@@ -32,7 +32,6 @@
 }
 
 .navbar .navLink {
-  text-decoration: none; /* Remove underline */
   color: #545b63; /* Default bootstrap link color */
   transition: color 0.3s; /* Smooth color transition for hover effect */
 }
@@ -47,23 +46,42 @@
   height: 28px;
 }
 
-.collapse {
-  /* This ensures that the collapsed menu is hidden by default */
+.collapsibleContent {
   display: none;
+}
 
-  /* Style when navbar is expanded (e.g., on smaller screens) */
-  @media (max-width: 768px) {
+@media  (max-width: 768px) {
+  .icon {
+    display: none;
+  }
+  .collapsibleContent {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      background-color: #fff; /* Background color for the collapsed menu */
+      text-align: left;
+      padding: 12px 24px;
+      background-color: #ededed; /* Background color for the collapsed menu */
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a "popup" effect */
+      border-left:  3px double #544c4c;
+      border-bottom:  3px double #544c4c;
       position: absolute;
       top: 100%; /* Position right below the navbar */
-      left: 0;
+      right: 0;
       z-index: 1001; /* Ensures it's above other content */
+      font-size: 24px;
   }
 }
+
+/* Define styles for the expanded navbar */
+.navbarExpanded {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background-color: #fff; /* Change the background color */
+  color: #333; /* Change the text color */
+  padding: 0;
+  margin: 0;
+}
+
 
 .navbar-toggler.collapsed + .collapse {
   /* Styles when the toggler is in collapsed state */

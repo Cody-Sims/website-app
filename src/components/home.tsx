@@ -35,9 +35,14 @@ const projectCards = [
         link: "https://hungrybison102.github.io/iterative-design/"
     },
     {
+        img: "/assets/pokemonBattle.webp",
+        title: "Pokemon Battle Simulator",
+        description: "A pokemon battle simulator including the original 151 pokemon created using Java and Javafx. Pokemon data was gathered using beautifulsoup for webscraping.",
+    },
+    {
         img: "/assets/pokemon.webp",
-        title: "Pokemon",
-        description: "Another description...",
+        title: "Pokemon Team Builder",
+        description: "A proof of concept utilizing Javascript with no framework to create a team builder. It is currently not mobile friendly",
         link: "https://quirkyturtle190.github.io/Development/"
     },
 ];
@@ -69,8 +74,8 @@ const Home: React.FC = () => {
 
     return (
         <Stack className={styles.containerHomeDiv}>
-            <div ref={imageRef} className={styles.backgroundImage}>
-                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100} layout="responsive" />
+            <div ref={imageRef}>
+                <Image src="/assets/caving.webp" alt="abseiling a cave" width={200} height={100} layout="responsive" className={styles.backgroundImage}/>
             </div>
             <Bio/>
             <Stack className={styles.containerHome}>
@@ -137,15 +142,28 @@ function WorkExperience() {
   const cardElements = workCards.map((card, index) => (
       <Link
           key={index}
-          href={`/project/${card.Company.replace(/\s+/g, "-").toLowerCase()}`}
+          href={`/job/${card.Company.replace(/\s+/g, "-").toLowerCase()}`}
           passHref
           style={{textDecoration:"none"}}
       >
-          <Stack tokens={{ childrenGap: "12px" }} className={styles.workCard}>
-              <h3>{card.Role}</h3>
-              <p className={styles.workCardTitle}>{card.Company}</p>
-              <Image src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
-          </Stack>
+        <div className={styles.workCard}>
+            <div className={styles.workCardInner}>
+                <div className={styles.workCardFront}>
+                    <h3>{card.Role}</h3>
+                    <p className={styles.workCardTitle}>{card.Company}</p>
+                    <Image src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
+                </div>
+                <div className={styles.workCardBack}>
+                    <div>
+                        <h3>{card.Role}</h3>
+                        <p className={styles.workCardTitle}>{card.Company}</p>
+                    </div>
+                    <div style={{margin: "4vh 0"}}>
+                        <p className={styles.workCardTitle}>{card.Description}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
       </Link>
   ));
 
@@ -158,28 +176,49 @@ function WorkExperience() {
       </Stack>
   );
 }
-  
+
+interface Card {
+    img: string;
+    title: string;
+    description: string;
+    link?: string;
+}
+
 function Projects() {
-  const cardElements = projectCards.map((card, index) => {
+    const router = useRouter();
+  
+    const handleCardClick = (card: Card, event:  React.MouseEvent<HTMLElement>) => {
+      if (!card.link) {
+        event.preventDefault(); // Prevent default link behavior
+        router.push(`/project/${encodeURIComponent(card.title)}`);
+      }
+      // If card has a link, it will use the default <Link> behavior
+    };
+  
+    const cardElements = projectCards.map((card, index) => {
       const url = card.link ? card.link : `/project/${encodeURIComponent(card.title)}`;
       return (
-          <Stack key={index} className={styles.projectCard} tokens={{ childrenGap: "24px" }}>
-              <h3>{card.title}</h3>
-              <Link href={url} passHref>
-                  <Image src={card.img} alt="Company Logo" width={200} height={100} layout="responsive" />
-              </Link>
-          </Stack>
+        <Stack key={index} className={styles.projectCard} tokens={{ childrenGap: "24px" }} onClick={(event) => handleCardClick(card, event)}>
+          <h3>{card.title}</h3>
+            <Stack tokens={{ childrenGap: "36px" }}>
+                <Link href={url} passHref>
+                    <Image className={styles.projectCardImg} src={card.img} alt="Company Logo" width={200} height={100} layout="responsive" />
+                </Link>
+                <h4>{card.description}</h4>
+            </Stack>
+        </Stack>
       );
-  });
-  return (
+    });
+  
+    return (
       <Stack className={styles.projectContainer}>
-          <h2 style={{ display: "flex", justifyContent: "center" }}>
-              Projects
-          </h2>
-          <Stack className={styles.projectCardContainer}>{cardElements}</Stack>
+        <h2 style={{ display: "flex", justifyContent: "center" }}>
+          Projects
+        </h2>
+        <Stack className={styles.projectCardContainer}>{cardElements}</Stack>
       </Stack>
-  );
-}
+    );
+  }
 
 
 export default Home

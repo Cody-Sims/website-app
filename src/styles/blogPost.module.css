@@ -1,0 +1,34 @@
+.containerBlogPost{
+    display: flex;
+    flex-direction: column;
+    margin: 0 30%;
+    background-color: var(--foreground-color);
+    min-height: 100vh;
+}
+
+.containerBlogPost img {
+    max-height: 50vh;      /* This maintains the aspect ratio */
+    object-fit: cover; /* This ensures the image covers the space without distorting */
+    margin: 0 auto;
+}
+
+
+.containerBlogPost h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+}
+
+.containerBlogPost p {
+    padding: 24px 36px;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .containerBlogPost {
+        margin: 0;
+    }
+    .containerBlogPost p {
+        padding: 24px;
+    }
+}
