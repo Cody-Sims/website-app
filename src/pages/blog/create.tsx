@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@fluentui/react';
-import styles from '../../styles/createPost.module.css'; // Adjust the import path to your actual CSS module file
+import styles from '../../styles/createBlog.module.css'; // Adjust the import path to your actual CSS module file
 import Blog from '../blog';
 import Image from 'next/image';
 

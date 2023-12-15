@@ -155,13 +155,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
         const height = image.naturalHeight;
         const size = Math.min(width, height) * 0.8;
     
+       // Set the crop to cover the entire image
         setCrop({
-            unit: '%',
-            x: ((width - size) / 2) / width * 100, // Convert to percentage
-            y: ((height - size) / 2) / height * 100, // Convert to percentage
-            width: size / width * 100, // Convert to percentage
-            height: size / height * 100, // Convert to percentage
-            aspect: 16 / 9,
+            unit: '%', // Use percentages
+            width: 100, // 100% of the image width
+            height: 100, // 100% of the image height
+            x: 0, // Start from the top-left corner
+            y: 0,
+            aspect: 16 / 9 // You can adjust the aspect ratio as needed
         });
     };
     
