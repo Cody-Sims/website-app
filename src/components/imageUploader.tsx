@@ -104,50 +104,32 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
     };    
 
     const uploadImage = async (croppedImageBlob: Blob) => {
+        const formData = new FormData();
+        formData.append('image', croppedImageBlob);
+
         try {
-            const formData = new FormData();
-            formData.append('file', croppedImageBlob, 'newImage.jpg');
-
-            const urlResponse = await fetch("https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/get-signed-url", {
+            const uploadResponse = await fetch("https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/upload-image", {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ fileType: croppedImageBlob.type })
+                body: formData,
             });
 
-            if (!urlResponse.ok) {
-                const error = await urlResponse.text();
-                alert(`Error: Failed to get signed URL. Server responded with - ${error}`);
-                return;
-            }
-
-            const { signedUrl, publicUrl } = await urlResponse.json();
-
-            const uploadResponse = await fetch(signedUrl, {
-                method: 'PUT',
-                body: croppedImageBlob,
-                headers: new Headers({
-                    'Content-Type': croppedImageBlob.type
-                }),
-            });
-
-            if (uploadResponse.ok) {
-                onUpload(publicUrl);
-            } else {
+            if (!uploadResponse.ok) {
                 const errorMessage = await uploadResponse.text();
-                alert(`Error during upload. Server responded with - ${errorMessage}`);
+                throw new Error(`Error during upload: ${errorMessage}`);
             }
-        } catch (err) {
-            if (err instanceof Error) {
-                console.error(err);
-                alert(`Unexpected Error: ${err.message}`);
+
+            const { imageUrl } = await uploadResponse.json();
+            onUpload(imageUrl);
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error(error);
+                alert(`Error: ${error.message}`);
             } else {
-                console.error('An unexpected error occurred', err);
+                console.error('An unexpected error occurred', error);
                 alert('An unexpected error occurred');
             }
         }
-    };
+    };    
 
     const onImageLoaded = (image: HTMLImageElement) => {
         setImageRef(image);

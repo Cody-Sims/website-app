@@ -78,13 +78,13 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isLightMode }) => {
                                 </Link>
                             </li>
                             <li className={styles.navItem}>
-                                <Link href="/travel" passHref legacyBehavior>
+                                <Link href="/" passHref legacyBehavior>
                                     <a className={`${styles.navLink} ${isActive('/travel') ? styles.active : ''}`}>Travel</a>
                                 </Link>
                             </li>
                             <li className={styles.navItem}>
-                                <Link href="/blog" passHref legacyBehavior>
-                                    <a className={`${styles.navLink} ${isActive('/blog') ? styles.active : ''}`}>Blog</a>
+                                <Link href="/" passHref legacyBehavior>
+                                    <a className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}>Blog</a>
                                 </Link>
                             </li>
                         </ul>

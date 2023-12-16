@@ -1,30 +1,62 @@
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from '../../styles/country.module.css';
+import Image from 'next/image';
+
+// Define a TypeScript interface for the post structure
+interface Post {
+    date: string;
+    type: 'image' | 'text';
+    content?: string;
+    imageUrl?: string;
+}
 
 export default function Country() {
     const router = useRouter();
-    const country = router.query.country;
+    const country = router.query.country as string;
+    const [posts, setPosts] = useState<Post[]>([]);
 
-    // Example data for timeline (add day, month, and year)
-    let timelineEvents = [
-        { date: '2020-01-15', event: "Event 1", photoURL: "", blogPost:"", tweet:""},
-        { date: '2021-06-22', event: "Event 2" },
-        { date: '2022-03-10', event: "Event 3" },
-        // ... more events
-    ];
+    useEffect(() => {
+        const fetchPosts = async () => {
+            if (country) {
+                try {
+                    const response = await fetch(`https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts/${country}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch posts');
+                    }
+                    const data: Post[] = await response.json();
+                    setPosts(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        };
 
-    // Sort events by date
-    timelineEvents = timelineEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        fetchPosts();
+    }, [country]);
+
+    // Sort posts by date
+    const sortedPosts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
             <div className={styles.timelineContainer}>
                 <div className={styles.timelineLine}></div>
-                {timelineEvents.map((item, index) => (
+                {sortedPosts.map((post, index) => (
                     <div key={index} className={styles.timelineEvent}>
-                        <h2>{item.date}</h2>
-                        <p>{item.event}</p>
+                        <h2>{new Date(post.date).toLocaleDateString()}</h2>
+                        {post.imageUrl && (
+                            <div className={styles.imageContainer}>
+                                <Image
+                                    src={post.imageUrl}
+                                    alt="Post"
+                                    layout="fill"
+                                    objectFit="cover" // Adjust as needed
+                                />
+                            </div>
+                        )}
+                        <p>{post.type === 'text' ? post.content : 'Image Post'}</p>
                     </div>
                 ))}
             </div>
