@@ -93,7 +93,7 @@ const Travel = ({ isLightMode }: TravelProps) => {
       const selectedItem = chart.getSelection()[0];
       if (selectedItem) {
         const country = data.getValue(selectedItem.row, 0);
-        router.push("/travel");
+        router.push(`/travel/`);
       }
     });
   }, [isLightMode, chartHeight, isGoogleChartsLoaded, router]);
