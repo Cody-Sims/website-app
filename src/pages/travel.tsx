@@ -39,7 +39,7 @@ const darkModeOptions = {
   },
   legend: 'none',
   borderColor: '#2f2f2f',
-  borderWidth: 1
+  borderWidth: 1,
 };
 
 
@@ -79,13 +79,17 @@ const Travel = ({ isLightMode }: TravelProps) => {
         ['Canada', 3, 'Trips: 3'],
         ['Spain', 3, 'Trips: 3'],
         ['Morocco', 1, 'Trips: 1'],
-        ['Vietnam', 1, 'Trips: 1'],
-        ['Thailand', 1, 'Trips: 1'],
+        ['Vietnam', 2, 'Trips: 2'],
+        ['Thailand', 2, 'Trips: 2'],
         ['United Kingdom', 1, 'Trips: 1'],
-        ['Ireland', 1, 'Trips: 1']
+        ['Ireland', 1, 'Trips: 1'],
+        ['Japan', 1, 'Trips: 1']
     ]);      
 
     const chartOptions = isLightMode ? lightModeOptions : darkModeOptions;
+    const trigger = window.innerWidth < 768 ? 'selection' : 'focus';
+    chartOptions.tooltip.trigger = trigger;
+  
     const chart = new window.google.visualization.GeoChart(document.getElementById('regions_div'));
     chart.draw(data, { ...chartOptions, height: chartHeight });
 
@@ -93,7 +97,8 @@ const Travel = ({ isLightMode }: TravelProps) => {
       const selectedItem = chart.getSelection()[0];
       if (selectedItem) {
         const country = data.getValue(selectedItem.row, 0);
-        router.push(`/travel/`);
+        router.push(`/travel`);
+        //router.push(`/travel/${country}`);
       }
     });
   }, [isLightMode, chartHeight, isGoogleChartsLoaded, router]);
@@ -127,6 +132,7 @@ const Travel = ({ isLightMode }: TravelProps) => {
 
     return () => window.removeEventListener('resize', updateChartSize);
   }, []);
+  
 
   return (
     <div className={styles.container} key={chartKey}>
@@ -138,7 +144,7 @@ const Travel = ({ isLightMode }: TravelProps) => {
         />
       </Head>
       <h1>Click on a country to see my adventures!</h1>
-      <h2>Countries Visited: 7</h2>
+      <h2>Countries Visited: 8</h2>
       <div className={styles.travelContainer}>
         <div id="regions_div" className={styles.regionsDiv}/>
       </div>

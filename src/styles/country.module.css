@@ -1,5 +1,7 @@
 .countryContainer {
-    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
     padding: 12px;
 }
 
@@ -18,13 +20,13 @@
     bottom: 0;
 }
 
-.timelineEvent {
+.postEvent, .imageEvent {
     position: relative;
     margin-bottom: 20px;
     padding-left: 60px;
 }
 
-.timelineEvent:before {
+.postEvent:before{
     content: '';
     position: absolute;
     left: -30px;
@@ -33,4 +35,32 @@
     height: 10px;
     border-radius: 50%;
     background: #333;
+}
+
+.imageEvent:before{
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+}
+
+.imageContainer {
+    width: 400px; /* Fixed width */
+    height: auto; /* Natural height */
+    margin-bottom: 10px;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .imageContainer {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .timelineContainer {
+        padding-left: 30px; /* Adjust padding for smaller screens */
+    }
 }

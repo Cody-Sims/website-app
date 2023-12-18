@@ -11,16 +11,21 @@ export default function CreatePost() {
     const [postDate, setPostDate] = useState(new Date().toISOString().slice(0, 16));
     const [location, setLocation] = useState('');
     const [latLong, setLatLong] = useState({ lat: 0.0, long: 0.0 });
+    const [manualCity, setManualCity] = useState('');
+    const [manualCountry, setManualCountry] = useState('');
 
     const submitPost = async (postType: 'image' | 'text', content = '', imageUrl = '') => {
-        const postData = {
+        let postData = {
             type: postType,
             content: content,
             imageUrl: imageUrl,
             date: new Date(postDate),
-            latitude: latLong.lat,
-            longitude: latLong.long,
+            // Include lat-long only if manual city/country are not provided
+            ...(manualCity === '' && manualCountry === '' ? { latitude: latLong.lat, longitude: latLong.long } : {}),
+            manualCity: manualCity,
+            manualCountry: manualCountry,
         };
+
         try {
             const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts', {
                 method: 'POST',
@@ -31,11 +36,16 @@ export default function CreatePost() {
             if (!response.ok) throw new Error('Failed to submit post');
             setTextPostStatus('Post submitted successfully!');
             if (postType === 'image') setTextPost('');  // Clear text post if it's an image upload
+            // Reset fields
+            setManualCity('');
+            setManualCountry('');
+            setLocation('');
         } catch (error) {
             setTextPostStatus('Error submitting post');
             console.error('Error:', error);
         }
     };
+
 
     const handleImageUploadSuccess = async (imageUrl: string) => {
         console.log(imageUrl);
@@ -60,7 +70,6 @@ export default function CreatePost() {
             }
         );
     }, []);
-    
 
     return (
         <Stack className={styles.containerCreatePost} style={{ alignItems: 'center', textAlign: "center", width: "100%", height: "200vh", marginTop: "10vh" }}>
@@ -69,13 +78,17 @@ export default function CreatePost() {
                 <textarea style={{ width: "25vw", height: "25vh" }}
                     value={textPost}
                     onChange={(e) => setTextPost(e.target.value)}
-                    maxLength={280}
+                    maxLength={1000}
                     placeholder="What's happening?"
                     className={styles.textArea}
                 />
                 <Stack horizontal tokens={{ childrenGap: 10 }}>
                     <Stack><input type="datetime-local" value={postDate} onChange={(e) => setPostDate(e.target.value)} /></Stack>
-                    <Stack><input type="text" value={location} onChange={(e) => setLocation(e.target.value)} /></Stack>
+                    <Stack><input type="text" placeholder="Latitude, Longitude" value={location} onChange={(e) => setLocation(e.target.value)} /></Stack>
+                </Stack>
+                <Stack horizontal tokens={{ childrenGap: 10 }}>
+                    <Stack><input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)} /></Stack>
+                    <Stack><input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)} /></Stack>
                 </Stack>
                 <button onClick={handleTextPostSubmit} className={styles.submitButton}>Tweet</button>
                 {textPostStatus && <p>{textPostStatus}</p>}

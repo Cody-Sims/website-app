@@ -71,7 +71,7 @@
   align-items: center;
 }
 
-.workCard:hover .workCardInner {
+.workCard:hover .workCardInner, .workCard:active .workCardInner{
   transform: rotateY(180deg);
 }
 
@@ -340,6 +340,20 @@
 
   .containerWork h2 {
     font-size: 2em;
+  }
+
+  .projectCardContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding: 10% 0%;
+    gap: 72px;
+  }
+
+  .projectCardContainer h4 {
+    display: flex;
+    font-size: 1.1em;
   }
 
   .backgroundImage {

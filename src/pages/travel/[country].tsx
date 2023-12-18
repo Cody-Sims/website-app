@@ -37,26 +37,42 @@ export default function Country() {
 
     // Sort posts by date
     const sortedPosts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const groupedPosts: { [date: string]: Post[] } = {};
+    sortedPosts.forEach((post) => {
+        const dateKey = new Date(post.date).toLocaleDateString();
+        if (!groupedPosts[dateKey]) {
+            groupedPosts[dateKey] = [];
+        }
+        groupedPosts[dateKey].push(post);
+    });
+
+
+    // Determine if the post is an image post
+    const isImagePost = (post: Post) => post.type === 'image';
 
     return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
             <div className={styles.timelineContainer}>
                 <div className={styles.timelineLine}></div>
-                {sortedPosts.map((post, index) => (
-                    <div key={index} className={styles.timelineEvent}>
-                        <h2>{new Date(post.date).toLocaleDateString()}</h2>
-                        {post.imageUrl && (
-                            <div className={styles.imageContainer}>
-                                <Image
-                                    src={post.imageUrl}
-                                    alt="Post"
-                                    layout="fill"
-                                    objectFit="cover" // Adjust as needed
-                                />
+                {Object.keys(groupedPosts).map((dateKey) => (
+                    <div key={dateKey}>
+                        <h2>{dateKey}</h2>
+                        {groupedPosts[dateKey].map((post, index) => (
+                            <div key={index} className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
+                                {post.imageUrl && (
+                                    <div className={styles.imageContainer}>
+                                        <Image
+                                            src={post.imageUrl}
+                                            alt="Post"
+                                            width={800} height={400} 
+                                            layout="responsive"
+                                        />
+                                    </div>
+                                )}
+                                {post.type === 'text' && (<p>{post.content}</p>)}
                             </div>
-                        )}
-                        <p>{post.type === 'text' ? post.content : 'Image Post'}</p>
+                        ))}
                     </div>
                 ))}
             </div>

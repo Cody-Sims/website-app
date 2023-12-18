@@ -18,17 +18,22 @@
 }
 
 .regionsDiv {
-    min-height: 80vh;
-    height: 80vh;
-    max-height: 80vh;
+    min-height: 70vh;
+    height: 70vh;
+    max-height: 70vh;
 }
 
 .regionsDiv path {
     cursor: pointer;
 }
 
-.regionsDiv path {
-    cursor: pointer;
+
+.regionsDiv .google-visualization-tooltip {
+    display: none;
+}
+
+.regionsDiv:hover .google-visualization-tooltip{
+    display: none; /* Display the tooltip when the container is active (e.g., tapped) */
 }
 
 /* Tablet-specific styles */
@@ -45,9 +50,8 @@
 /* Tablet-specific styles */
 @media (max-width: 723px) {
     .regionsDiv {
-        /* Reset height to default and set width */
         min-height: auto;
-        height: auto;
+        height: 80vh;
         max-height: auto;
         min-width: 200vw;
     }

@@ -63,10 +63,3 @@
   color: var(--text-color-light);
 }
 
-/* Styles for Google Visualization Tooltip */
-.google-visualization-tooltip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
