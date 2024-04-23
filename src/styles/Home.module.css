@@ -158,7 +158,7 @@
 }
 
 .containerBio p {
-  font-size: 32px;
+  font-size: 48px;
   color: #f4f4f4;
 }
 
@@ -166,10 +166,21 @@
   display: flex;
   flex-direction: row;
 }
+
+.containerAboutMeImg {
+  display: flex;
+  width: 100%;
+}
+
+.containerAboutMeBio{
+  display: flex;
+  width: 60%;
+}
 /* About Me Container Styles */
 .containerAboutMeBio p {
+  display: flex;
   color: var(--text-about-me);
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .containerAboutMeBio h1 {
@@ -218,6 +229,10 @@
 
 .itemHalfWidth {
   flex: 1 1 50%; /* This sets the item to take half of the parent container's width */
+}
+
+.imgPortrait {
+  height: 50%
 }
 
 
@@ -333,10 +348,7 @@
     max-height: 200px;
   }
 
-  .imgPortrait {
-    min-width: 50%;
-    max-width: 75%;
-  }
+  
 
   .containerWork h2 {
     font-size: 2em;

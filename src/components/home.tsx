@@ -106,36 +106,36 @@ function AboutMe() {
 
   return (
       <Stack className={styles.containerAboutMe}>
-          <Image src="/assets/portrait.png" alt="Self-Portrait" className={`${styles.imgPortrait} ${styles.itemHalfWidth}`} width={100} height={100} layout="responsive" />
-          <Stack className={`${styles.containerAboutMeBio} ${styles.itemHalfWidth}`}>
+            <Stack className={styles.containerAboutMeImg}>
+                <Image src="/assets/portrait.png" alt="Self-Portrait" className={styles.imgPortrait} width={50} height={50} layout="responsive" />
+            </Stack>
+            <Stack className={styles.containerAboutMeBio}>
                 <h2>
                     Hey, I&apos;m Cody
                 </h2>
                 <p>
-                    I&apos;m currently a student at Brown University in Providence, Rhode Island. This past summer, I interned at 
-                    Microsoft, and I will be returning for New Grad in 2024
+                    I recently graduated from Brown University with a Bachelors in Computer Science. These days, I live in Seattle working for Microsoft. 
                 </p>
                 <p>
-                    My current project is a stock market simulator utilizing redux and financial apis for data and firebase for
-                    authentication. I am hoping to be able to release it soon.
+                    As a New Graduate, I am learning a lot as I navigate the workforce.
                 </p>
                 <p>
-                    Outside of programming, I love to travel, and I will be backpacking through Thailand for a month this winter while
-                    I am on vacation. Look forward to new blogs about my travels!
+                    When I am not working, you can find me exploring, whether that be my city or the world. I am also attempting to blog, 
+                    so check out my blog page.
                 </p>
-              <Stack horizontal className={styles.resumeBut}>
-                  <button onClick={handleClick} className={styles.resumeButButton}>
-                      <h2>
-                          Resume
-                      </h2>
-                  </button>
-                  <Link href="https://www.linkedin.com/in/codymsims/" passHref>
-                      <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
-                  </Link>
-              </Stack>
-          </Stack>
-      </Stack>
-  );
+                <Stack horizontal className={styles.resumeBut}>
+                    <button onClick={handleClick} className={styles.resumeButButton}>
+                        <h2>
+                            Resume
+                        </h2>
+                    </button>
+                    <Link href="https://www.linkedin.com/in/codymsims/" passHref>
+                        <Image src="/assets/linkedin.svg" alt="LinkedIn profile" className={styles.resumeButImg} width={75} height={75} layout="responsive" />
+                    </Link>
+                </Stack>
+            </Stack>
+        </Stack>
+    );
 }
 
 function WorkExperience() {

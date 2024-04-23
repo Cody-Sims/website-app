@@ -1,0 +1,38 @@
+
+.containerScrapbook {
+    height: 95vh
+}
+.containerScrapbookItem{
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerText{
+    gap: 100px;
+}
+
+.containerText h1 {
+    font-weight: 400;
+}
+
+.containerRegion {
+    display: flex;
+    align-items: center;
+    gap: 3vh;
+}
+
+.containerBio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+.containerBio2{
+    margin-top: 24px;
+    width: 50vw
+}
+.containerBio2 h1{
+    font-size: 2em;
+}
