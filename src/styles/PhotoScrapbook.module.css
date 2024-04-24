@@ -1,0 +1,85 @@
+.container {
+    background-color: inherit;
+    padding-bottom: 12px;
+}
+
+.filmstrip {
+    --background: rgba(0, 0, 0, 0.5);
+    --size: 10px;
+    background-image: linear-gradient(to right, var(--background) var(--size), transparent var(--size)),
+                      linear-gradient(to bottom, var(--background) var(--size), transparent var(--size)),
+                      linear-gradient(to right, var(--background) var(--size), transparent var(--size)),
+                      linear-gradient(to bottom, var(--background) var(--size), transparent var(--size)),
+                      linear-gradient(to bottom, transparent var(--size), var(--background) var(--size));
+    background-size: calc(var(--size) * 2) var(--size),
+                     calc(var(--size) * 2) var(--size),
+                     calc(var(--size) * 2) var(--size),
+                     calc(var(--size) * 2) var(--size),
+                     100% calc(100% - var(--size) * 3);
+    background-repeat: repeat-x;
+    background-position: 0 var(--size),
+                         top left,
+                         0 calc(100% - var(--size)),
+                         bottom left,
+                         0 var(--size);
+    padding: calc(var(--size) * 3) calc(var(--size) * 2.5);
+    box-sizing: border-box;
+}
+
+.photoScrapbook {
+    background-color: white;
+    margin: 24px 0;
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 20px;
+
+}
+
+.photoScrapbook .photo {
+    position: relative; /* Position relative for absolute positioning of caption */
+    flex: 0 0 auto;
+    width: auto; /* Set the width of each photo */
+    max-height: 50vh; /* Set the height of each photo */
+    border: 5px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.photoScrapbook .photo img {
+    object-fit: contain;
+    height: 300px;
+    width: auto;
+}
+
+.photoScrapbook .caption {
+    position: relative; /* Position relative for stacking */
+    background-color: #fff; /* White background for the caption */
+    text-align: center; /* Center the text */
+    padding: 10px; /* Add padding for better readability */
+    font-style: italic;
+    font-size: 0.8em;
+    color: #666;
+    z-index: 1; /* Ensure caption is above the pseudo-elements */
+}
+
+@media only screen and (max-width: 768px) {
+    .filmstrip {
+        --size: 5px;
+    }   
+    .photoScrapbook {
+        background-color: white;
+        padding: 24px 0;
+        display: flex;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        gap: 20px;
+    
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .photoScrapbook {
+        justify-content: center;
+    }
+}
+
+
+

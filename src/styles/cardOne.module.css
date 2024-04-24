@@ -2,9 +2,8 @@
     /* Styles for the overall card container */
     width: 50vw/* Set a desired width for the card */; 
     position: relative; /* Allows positioning of foreground photos */
-    border: 5px solid gold; /*
+    border: 5px solid gold;
 }
-  
 
 .backgroundImage {
     width: 100%; 
@@ -80,12 +79,19 @@
   left: 0;
 }
 
-
-
 .flippedPhoto {
   transform: rotateY(180deg); /* Or your desired flip animation */
   width: 100%;    
   height: 100%;  
   background-color: white;
   position: absolute; /* To overlay on top of the background image */
+}
+
+@media only screen and (max-width: 768px) {
+  .cardContainer {
+    /* Styles for the overall card container */
+    width: 100vw/* Set a desired width for the card */; 
+    position: relative; /* Allows positioning of foreground photos */
+    border: 5px solid gold;
+  }
 }

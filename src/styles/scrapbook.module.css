@@ -2,6 +2,7 @@
 .containerScrapbook {
     height: 95vh
 }
+
 .containerScrapbookItem{
     height: 95vh;
     display: flex;
@@ -29,10 +30,39 @@
     width: 100vw;
     height: 100vh;
 }
+
 .containerBio2{
     margin-top: 24px;
     width: 50vw
 }
 .containerBio2 h1{
     font-size: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+    .containerBio2{
+        width: 90vw
+    }
+    .containerBio {
+        display: flex;
+        width: 100vw;
+        height: auto;
+        margin-bottom: 24px;
+    }
+    .containerBio h1{
+        font-size: 1.2em;
+    }
+    .containerScrapbookItem {
+        height: auto;
+        padding: 12px 0 24px 0;
+        border: 1px solid white
+    }
+    .containerRegion {
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+    .containerText h1{
+        font-size: 1.2em;
+    }
 }

@@ -8,7 +8,7 @@ interface CardOneProps {
     foregroundImages: string[];
     foregroundImagesDesc: string[];
     description: string;
-  }
+}
 
 const CardOne = ({ backgroundImage, foregroundImages, foregroundImagesDesc, description}: CardOneProps) => {
   const [isBackgroundFlipped, setIsBackgroundFlipped] = useState(false);

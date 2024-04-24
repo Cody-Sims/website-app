@@ -3,6 +3,7 @@ import styles from "../styles/scrapbook.module.css"
 import React from 'react';
 import Head from 'next/head';
 import CardOne from '@/components/scrapbook/cardOne';
+import CardTwo from '@/components/scrapbook/cardTwo';
 
 
 interface ScrapbookPage {
@@ -106,13 +107,13 @@ export default function ScrapbookPage() {
                 </Stack>
 
 
-                <Stack className={styles.containerScrapbookItem}> 
+                <Stack className={`${styles.containerScrapbookItem} ${styles.filmFrame}`}> 
                     <Stack className={styles.containerRegion}>
                         <Stack horizontal className={styles.containerText}>
                             <h1>{myScrapbookPage2.location}</h1>
                             <h1>{myScrapbookPage2.date}</h1> 
                         </Stack>
-                        <CardOne
+                        <CardTwo
                             backgroundImage={myScrapbookPage2.mainImage}
                             foregroundImages={myScrapbookPage2.foregroundImages} 
                             foregroundImagesDesc = {myScrapbookPage2.foregroundImagesDesc}
