@@ -12,6 +12,7 @@ interface CardTwoProps {
 
 // Select three random indices for the foreground images
 const selectedIndices: number[] = [];
+const randomStyle = Math.random() < 0.5 ? 'style1' : 'style2';
 
 const CardTwo = ({ backgroundImage, foregroundImages, foregroundImagesDesc, description }: CardTwoProps) => {
     const [flippedPhotos, setFlippedPhotos] = useState(
@@ -35,14 +36,13 @@ const CardTwo = ({ backgroundImage, foregroundImages, foregroundImagesDesc, desc
         }
     }
 
-    const randomStyle = Math.random() < 0.5 ? 'style1' : 'style2';
 
 
     return (
         <div className={styles.cardContainer}>
             {selectedIndices.map((index) => (
             <Stack className={`${styles.photoContainer} ${styles[randomStyle]}`} key={index}>
-                    {!flippedPhotos[index] && ( // Show description if not flipped
+                
                         <Image
                             key={index}
                             src={foregroundImages[index]}
@@ -51,12 +51,10 @@ const CardTwo = ({ backgroundImage, foregroundImages, foregroundImagesDesc, desc
                             layout="responsive"
                             width={200} height={200}
                             onClick={() => handlePhotoFlip(index)} />
-                    )}
-    
+
                     {flippedPhotos[index] && ( // Show description if flipped
                         <Stack className={`${styles.foregroundPhotoFlipped} ${styles[`photo${index + 1}`]}`}
-                            onClick={() => handlePhotoFlip(index)}
-                        >
+                            onClick={() => handlePhotoFlip(index)}>
                             <h1>
                                 {foregroundImagesDesc[index]}
                             </h1>

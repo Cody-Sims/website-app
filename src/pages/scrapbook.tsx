@@ -4,6 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 import CardOne from '@/components/scrapbook/cardOne';
 import CardTwo from '@/components/scrapbook/cardTwo';
+import Film from '@/components/scrapbook/film';
 
 
 interface ScrapbookPage {
@@ -84,6 +85,7 @@ export default function ScrapbookPage() {
                     content="This is a page dedicated to my friends and my college experience"
                     />
                 </Head>   
+                <Film/>
                 <Stack className={styles.containerBio}>
                     <Stack className={styles.containerBio2}>
                         <h1>
@@ -91,21 +93,6 @@ export default function ScrapbookPage() {
                         </h1>
                     </Stack>
                 </Stack>
-                <Stack className={styles.containerScrapbookItem}> 
-                    <Stack className={styles.containerRegion}>
-                        <Stack horizontal className={styles.containerText}>
-                            <h1>{myScrapbookPage.location}</h1>
-                            <h1>{myScrapbookPage.date}</h1> 
-                        </Stack>
-                        <CardOne
-                            backgroundImage={myScrapbookPage.mainImage}
-                            foregroundImages={myScrapbookPage.foregroundImages} 
-                            foregroundImagesDesc = {myScrapbookPage.foregroundImagesDesc}
-                            description = {myScrapbookPage.description}
-                        />
-                    </Stack>
-                </Stack>
-
 
                 <Stack className={`${styles.containerScrapbookItem} ${styles.filmFrame}`}> 
                     <Stack className={styles.containerRegion}>
