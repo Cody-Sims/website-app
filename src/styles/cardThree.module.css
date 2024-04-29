@@ -1,4 +1,11 @@
+
+.container {
+    padding-top: 10vh;
+    min-height: 100vh;
+    min-width: 100vw;
+}
 .cardContainer {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Creates three columns of equal width */
     gap: 2px; /* Space between grid items */
@@ -22,10 +29,10 @@
 
 .foregroundPhotoFlipped {
     position: absolute; /* Overlay positioning */
-    max-width: 100%;
-    max-height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    top: 0;  /* Position at the top of the parent */
+    left: 0; /* Position at the left of the parent */
+    min-width: 100%;
+    min-height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     color: white; /* Text color */
     display: flex;
@@ -34,6 +41,10 @@
     text-align: center;
 }
 
+.foregroundPhotoFlipped h1{
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+}
 @media only screen and (max-width: 768px) {
     .cardContainer {
       max-width: 90vw;

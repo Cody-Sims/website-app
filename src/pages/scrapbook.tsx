@@ -5,6 +5,7 @@ import Head from 'next/head';
 import CardOne from '@/components/scrapbook/cardOne';
 import CardTwo from '@/components/scrapbook/cardTwo';
 import Film from '@/components/scrapbook/film';
+import CardThree from '@/components/scrapbook/cardThree';
 
 
 interface ScrapbookPage {
@@ -116,6 +117,21 @@ export default function ScrapbookPage() {
                             <h1>{myScrapbookPage3.date}</h1> 
                         </Stack>
                         <CardOne
+                            backgroundImage={myScrapbookPage3.mainImage}
+                            foregroundImages={myScrapbookPage3.foregroundImages} 
+                            foregroundImagesDesc = {myScrapbookPage3.foregroundImagesDesc}
+                            description = {myScrapbookPage3.description}
+                        />
+                    </Stack>
+                </Stack>
+
+                <Stack className={styles.containerScrapbookItem}> 
+                    <Stack className={styles.containerRegion}>
+                        <Stack horizontal className={styles.containerText}>
+                            <h1>{myScrapbookPage3.location}</h1>
+                            <h1>{myScrapbookPage3.date}</h1> 
+                        </Stack>
+                        <CardThree
                             backgroundImage={myScrapbookPage3.mainImage}
                             foregroundImages={myScrapbookPage3.foregroundImages} 
                             foregroundImagesDesc = {myScrapbookPage3.foregroundImagesDesc}
