@@ -140,13 +140,7 @@ function AboutMe() {
 
 function WorkExperience() {
   const cardElements = workCards.map((card, index) => (
-      <Link
-          key={index}
-          href={""}
-          passHref
-          style={{textDecoration:"none"}}
-      >
-        <div className={styles.workCard}>
+        <div className={styles.workCard} key={index}>
             <div className={styles.workCardInner}>
                 <div className={styles.workCardFront}>
                     <h3>{card.Role}</h3>
@@ -164,7 +158,7 @@ function WorkExperience() {
                 </div>
             </div>
         </div>
-      </Link>
+ 
   ));
 
   return (

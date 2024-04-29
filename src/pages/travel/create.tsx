@@ -75,7 +75,7 @@ export default function CreatePost() {
         <Stack className={styles.containerCreatePost} style={{ alignItems: 'center', textAlign: "center", width: "90vw", height: "200vh", marginTop: "10vh" }}>
             <Stack>
                 <h2>Create a Text Post</h2>
-                <textarea style={{ width: "400px", height: "50vh" }}
+                <textarea style={{ minWidth: "400px", height: "50vh" }}
                     value={textPost}
                     onChange={(e) => setTextPost(e.target.value)}
                     maxLength={1000}
@@ -83,12 +83,12 @@ export default function CreatePost() {
                     className={styles.textArea}
                 />
                 <Stack horizontal tokens={{ childrenGap: 10 }} style={{margin: "6px 0"}}>
-                    <Stack><input type="datetime-local" value={postDate} onChange={(e) => setPostDate(e.target.value)} style={{ width: "245px"}}/></Stack>
-                    <Stack><input type="text" placeholder="Latitude, Longitude" value={location} onChange={(e) => setLocation(e.target.value)} style={{ width: "245px"}} /></Stack>
+                    <Stack><input type="datetime-local" value={postDate} onChange={(e) => setPostDate(e.target.value)} style={{ maxWidth: "45vw"}}/></Stack>
+                    <Stack><input type="text" placeholder="Latitude, Longitude" value={location} onChange={(e) => setLocation(e.target.value)} style={{ maxWidth: "45vw"}} /></Stack>
                 </Stack>
                 <Stack horizontal tokens={{ childrenGap: 10 }} style={{marginBottom: "6px"}}>
-                    <Stack><input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)} style={{ width: "245px"}}/></Stack>
-                    <Stack><input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)} style={{ width: "245px"}}/></Stack>
+                    <Stack><input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)} style={{ maxWidth: "45vwx"}}/></Stack>
+                    <Stack><input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)} style={{ maxWidth: "45vw"}}/></Stack>
                 </Stack>
                 <button onClick={handleTextPostSubmit} className={styles.submitButton} style={{ width: "400px"}}>Tweet</button>
                 {textPostStatus && <p>{textPostStatus}</p>}
