@@ -72,10 +72,10 @@ export default function CreatePost() {
     }, []);
 
     return (
-        <Stack className={styles.containerCreatePost} style={{ alignItems: 'center', textAlign: "center", width: "100%", height: "200vh", marginTop: "10vh" }}>
+        <Stack className={styles.containerCreatePost} style={{ alignItems: 'center', textAlign: "center", width: "90vw", height: "200vh", marginTop: "10vh" }}>
             <Stack>
                 <h2>Create a Text Post</h2>
-                <textarea style={{ width: "500px", height: "50vh" }}
+                <textarea style={{ width: "400px", height: "50vh" }}
                     value={textPost}
                     onChange={(e) => setTextPost(e.target.value)}
                     maxLength={1000}
@@ -90,7 +90,7 @@ export default function CreatePost() {
                     <Stack><input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)} style={{ width: "245px"}}/></Stack>
                     <Stack><input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)} style={{ width: "245px"}}/></Stack>
                 </Stack>
-                <button onClick={handleTextPostSubmit} className={styles.submitButton} style={{ width: "500px"}}>Tweet</button>
+                <button onClick={handleTextPostSubmit} className={styles.submitButton} style={{ width: "400px"}}>Tweet</button>
                 {textPostStatus && <p>{textPostStatus}</p>}
             </Stack>
             <Stack style={{ width: "50vw", marginTop: "10vh" }}>

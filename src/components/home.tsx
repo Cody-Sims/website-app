@@ -142,7 +142,7 @@ function WorkExperience() {
   const cardElements = workCards.map((card, index) => (
       <Link
           key={index}
-          href={`/job/${card.Company.replace(/\s+/g, "-").toLowerCase()}`}
+          href={""}
           passHref
           style={{textDecoration:"none"}}
       >

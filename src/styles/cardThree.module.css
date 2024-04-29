@@ -1,0 +1,43 @@
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns of equal width */
+    gap: 2px; /* Space between grid items */
+    max-width: 30vw; /* Adjust based on your design requirements */
+    margin: auto; /* Centering the grid container horizontally */
+}
+
+.photoContainer {
+    position: relative; /* Allows overlaying elements */
+    display: flex; /* Flexbox for internal centering */
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Utilizes the full width of the grid column */
+    aspect-ratio: 16/9;
+}
+
+.foregroundPhoto {
+    width: 100%;     /* Now free to adjust width to maintain aspect ratio */
+    height: 100%;    /* Ensures it fills the 300px tall container */
+}
+
+.foregroundPhotoFlipped {
+    position: absolute; /* Overlay positioning */
+    max-width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .cardContainer {
+      max-width: 90vw;
+    }
+  }
+
+
