@@ -1,0 +1,33 @@
+.container {
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.container textArea {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    max-height: 50vh;
+    min-width: 75vw;
+    max-width: 90vw;
+}
+
+.containerInput {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 24px;
+}
+
+.containerInput input{
+    display: flex;
+    min-width: 43vw;
+    flex-grow: 1;
+}
+
+.container button {
+    width: 90%;
+}

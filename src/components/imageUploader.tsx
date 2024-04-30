@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ReactCrop, { Crop as BaseCrop, PixelCrop, PercentCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Image from 'next/image';
@@ -16,6 +16,8 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
     const [crop, setCrop] = useState<Crop>({ unit: '%', width: 30, height: 30, aspect: 16 / 9, x: 0, y: 0 });
     const [croppedImage, setCroppedImage] = useState<string | null>(null);
     const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null); // Create a ref for the file input
+
 
     const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -120,6 +122,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
 
             const { imageUrl } = await uploadResponse.json();
             onUpload(imageUrl);
+            setSrc(null)
+            setCrop({ unit: '%', width: 30, height: 30, aspect: 16 / 9, x: 0, y: 0 })
+            setCroppedImage(null)
+            setImageRef(null)
+             // Clear the input file
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
         } catch (error) {
             if (error instanceof Error) {
                 console.error(error);
@@ -163,13 +173,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
 
     return (
         <div>
-            <input type="file" accept="image/*" onChange={onSelectFile} />
+            <input type="file" accept="image/*" onChange={onSelectFile} ref={fileInputRef}/>
             {src && !croppedImage && (
                 <>
                     <ReactCrop 
                         crop={crop}
                         onChange={onCropChange}
-                        style={{ position: 'relative', width: '100%', height: 'auto' }}>
+                        style={{ position: 'relative', width: '90vw', height: 'auto' }}>
                         <img 
                             alt="Crop" 
                             src={src} 
@@ -179,11 +189,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
                     <button onClick={makeClientCrop}>Submit</button>
                 </>
             )}
-            {croppedImage && (
-                <div style={{ position: 'relative', width: '100%', height: '300px' /* Example height */ }}>
+            {/* {croppedImage && (
+                <div style={{ position: 'relative', width: '90vw', height: "auto" }}>
                     <Image alt="Crop" src={croppedImage} layout="fill" />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

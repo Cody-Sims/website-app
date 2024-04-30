@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { Stack } from '@fluentui/react';
-import styles from '../../styles/createPost.module.css';
-
-const ImageUploader = dynamic(() => import('../../components/imageUploader'), { ssr: false });
+import styles from '../../../styles/createPost.module.css';
 
 export default function CreatePost() {
     const [textPost, setTextPost] = useState('');
@@ -20,7 +17,6 @@ export default function CreatePost() {
             content: content,
             imageUrl: imageUrl,
             date: new Date(postDate),
-            // Include lat-long only if manual city/country are not provided
             ...(manualCity === '' && manualCountry === '' ? { latitude: latLong.lat, longitude: latLong.long } : {}),
             manualCity: manualCity,
             manualCountry: manualCountry,
@@ -72,30 +68,26 @@ export default function CreatePost() {
     }, []);
 
     return (
-        <Stack className={styles.containerCreatePost} style={{ alignItems: 'center', textAlign: "center", width: "90vw", height: "200vh", marginTop: "10vh" }}>
-            <Stack>
+        <Stack>
+            <Stack className={styles.container}>
                 <h2>Create a Text Post</h2>
-                <textarea style={{ minWidth: "400px", height: "50vh" }}
+                <textarea
                     value={textPost}
                     onChange={(e) => setTextPost(e.target.value)}
                     maxLength={1000}
                     placeholder="What's happening?"
                     className={styles.textArea}
                 />
-                <Stack horizontal tokens={{ childrenGap: 10 }} style={{margin: "6px 0"}}>
-                    <Stack><input type="datetime-local" value={postDate} onChange={(e) => setPostDate(e.target.value)} style={{ maxWidth: "45vw"}}/></Stack>
-                    <Stack><input type="text" placeholder="Latitude, Longitude" value={location} onChange={(e) => setLocation(e.target.value)} style={{ maxWidth: "45vw"}} /></Stack>
+                <Stack className={styles.containerInput} horizontal tokens={{ childrenGap: 10 }} style={{margin: "6px 0"}}>
+                    <input type="datetime-local" value={postDate} onChange={(e) => setPostDate(e.target.value)}/>
+                    <input type="text" placeholder="Latitude, Longitude" value={location} onChange={(e) => setLocation(e.target.value)}/>
                 </Stack>
-                <Stack horizontal tokens={{ childrenGap: 10 }} style={{marginBottom: "6px"}}>
-                    <Stack><input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)} style={{ maxWidth: "45vwx"}}/></Stack>
-                    <Stack><input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)} style={{ maxWidth: "45vw"}}/></Stack>
+                <Stack className={styles.containerInput} horizontal tokens={{ childrenGap: 10 }} style={{marginBottom: "6px"}}>
+                    <input type="text" placeholder="City (Optional)" value={manualCity} onChange={(e) => setManualCity(e.target.value)}/>
+                    <input type="text" placeholder="Country (Optional)" value={manualCountry} onChange={(e) => setManualCountry(e.target.value)}/>
                 </Stack>
-                <button onClick={handleTextPostSubmit} className={styles.submitButton} style={{ width: "400px"}}>Tweet</button>
+                <button onClick={handleTextPostSubmit} className={styles.submitButton}>Tweet</button>
                 {textPostStatus && <p>{textPostStatus}</p>}
-            </Stack>
-            <Stack style={{ width: "50vw", marginTop: "10vh" }}>
-                <h2>Upload an Image</h2>
-                <ImageUploader onUpload={handleImageUploadSuccess} />
             </Stack>
         </Stack>
     );
