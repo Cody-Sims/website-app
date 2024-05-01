@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/country.module.css';
 import Image from 'next/image';
+import Film from '@/components/scrapbook/film';
 
 // Define a TypeScript interface for the post structure
 interface Post {
@@ -9,12 +10,14 @@ interface Post {
     type: 'image' | 'text';
     content?: string;
     imageUrl?: string;
+    manuelCity?: string;
 }
 
 export default function Country() {
     const router = useRouter();
     const country = router.query.country as string;
     const [posts, setPosts] = useState<Post[]>([]);
+    const [imagePosts, setImagePosts] = useState<Post[]>([]);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -35,6 +38,24 @@ export default function Country() {
         fetchPosts();
     }, [country]);
 
+    useEffect(() => {
+        const fetchImagePosts = async () => {
+            if (country) {
+                try {
+                    const response = await fetch(`https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts/${country}/images`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch posts');
+                    }
+                    const data: Post[] = await response.json();
+                    setImagePosts(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        };
+        fetchImagePosts();
+    }, [country]);
+
     // Sort posts by date
     const sortedPosts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     const groupedPosts: { [date: string]: Post[] } = {};
@@ -46,6 +67,10 @@ export default function Country() {
         groupedPosts[dateKey].push(post);
     });
 
+    //TODO: Seperate Image Posts and Text Posts
+    //TODO: Add film reel
+
+
 
     // Determine if the post is an image post
     const isImagePost = (post: Post) => post.type === 'image';
@@ -53,6 +78,7 @@ export default function Country() {
     return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
+            <Film posts={imagePosts}/>
             <div className={styles.timelineContainer}>
                 <div className={styles.timelineLine}></div>
                 {Object.keys(groupedPosts).map((dateKey) => (
