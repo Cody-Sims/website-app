@@ -87,6 +87,11 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isLightMode }) => {
                                     <a onClick={handleNavCollapse} className={`${styles.navLink} ${isActive('/blog') ? styles.active : ''}`}>Blog</a>
                                 </Link>
                             </li>
+                            <li className={styles.navItem}>
+                                <Link href="/login" passHref legacyBehavior>
+                                    <a onClick={handleNavCollapse} className={`${styles.navLink} ${isActive('/login') ? styles.active : ''}`}>Login</a>
+                                </Link>
+                            </li>
                         </ul>
                 </div>
             </nav>

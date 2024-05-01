@@ -2,6 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/travel.module.css';
+import { Icon } from '@fluentui/react/lib/Icon';
+import { getCurrentUserEmail } from '../../firebase-config';
+import { Stack } from '@fluentui/react';
+import Link from 'next/link';
+
 
 
 type TravelProps = {
@@ -48,6 +53,8 @@ const Travel = ({ isLightMode }: TravelProps) => {
   const [chartHeight, setChartHeight] = useState('80vh');
   const [isGoogleChartsLoaded, setIsGoogleChartsLoaded] = useState(false);
   const [chartKey, setChartKey] = useState(Date.now()); // Unique key for chart container
+  const adminEmail = "codysims190@gmail.com"; // Set the specific email to check against
+  const [userEmail, setUserEmail] = useState("");
 
 
   // Function to load the Google Charts library
@@ -131,6 +138,17 @@ const Travel = ({ isLightMode }: TravelProps) => {
 
     return () => window.removeEventListener('resize', updateChartSize);
   }, []);
+
+  useEffect(() => {
+    getCurrentUserEmail()
+      .then(email => {
+        console.log(email)
+        setUserEmail(email);
+      })
+      .catch(error => {
+        console.error("Error fetching user email:", error);
+      });
+  }, []);
   
 
   return (
@@ -142,7 +160,16 @@ const Travel = ({ isLightMode }: TravelProps) => {
           content="Experience my journey as I travel the world. From interesting insights to crazy travel stories, there is so much to explore"
         />
       </Head>
-      <h1>Click on a country to see my adventures!</h1>
+      <Stack horizontal className={styles.header}>
+        <h1>
+          Click on a country to see my adventures!
+        </h1>
+        {userEmail === adminEmail && 
+          <Link href="/travel/upload/post" passHref legacyBehavior>
+                <Icon iconName="Add" style={{paddingLeft: "10vw", fontSize: "2vw"}}/>
+          </Link>
+        }
+      </Stack>
       <h2>Countries Visited: 8</h2>
       <div className={styles.travelContainer}>
         <div id="regions_div" className={styles.regionsDiv}/>

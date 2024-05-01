@@ -4,6 +4,8 @@ import Navbar from "../components/navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import './_app.css';
 import LoadingScreen from '@/components/loading_screen';
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
+initializeIcons();
 
 function MyApp({ Component, pageProps }: AppProps) {
     const [isLightMode, setIsLightMode] = useState<boolean | undefined>(undefined);
