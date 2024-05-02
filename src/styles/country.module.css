@@ -40,16 +40,7 @@
 }
 
 
-.postEvent:before{
-    content: '';
-    position: absolute;
-    left: -30px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #333;
-}
+
 
 .postEvent {
     position: relative;
@@ -61,7 +52,28 @@
     padding: 6px 6px 2px 18px;
 }
 
+.postEvent:before{
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+}
+
+.postEventInput {
+    background-color: inherit;
+    border: none;
+    width: 48vw;
+    font-size: 24px;
+    resize: none; /* Prevent manual resizing */
+    overflow: hidden; /* Hide scrollbar */
+}
+
 .postEvent p {
+    padding-right: 8px;
     font-size: 24px;
 }
 
@@ -82,10 +94,46 @@
     margin-bottom: 10px;
 }
 
+.containerTools {
+    display: flex;
+    box-shadow: 0 0 8px 4px rgba(0,0,0,0.15);
+    background-color: rgb(234, 234, 234);
+    padding: 12px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+.containerTools {
+    display: flex;
+    box-shadow: 0 0 8px 4px rgba(0,0,0,0.15);
+    background-color: rgb(234, 234, 234);
+    padding: 12px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+.icon {
+    font-size: 24px;
+}
+
 /* Responsive Design for smaller screens */
 @media (max-width: 768px) {
+    .containerEvent {
+        max-width: 95%;
+    }
+    
     .imageContainer {
-        width: 90%; /* Full width on smaller screens */
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .containerEvent .postEvent{
+        width: 100%;
     }
 
     .timelineContainer {
@@ -97,5 +145,12 @@
     }
     .postEvent p {
         font-size: 16px;
+    }
+    .containerTools {
+        margin-left: 16px;
+        padding: 6px;
+    }
+    .timelineLine {
+        left: 14px; 
     }
 }

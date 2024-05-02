@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/country.module.css';
 import Image from 'next/image';
 import Film from '@/components/scrapbook/film';
+import { getCurrentUserEmail } from '../../../firebase-config';
+import { Icon, Stack } from '@fluentui/react';
 
 // Define a TypeScript interface for the post structure
 interface Post {
+    _id: number;
     date: string;
     type: 'image' | 'text';
     content?: string;
@@ -13,11 +16,22 @@ interface Post {
     manuelCity?: string;
 }
 
+interface GroupedPosts {
+    [key: string]: Post[];
+}
+
 export default function Country() {
     const router = useRouter();
     const country = router.query.country as string;
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [groupedPosts, setGroupedPosts] = useState<GroupedPosts>({});
     const [imagePosts, setImagePosts] = useState<Post[]>([]);
+    const [userEmail, setUserEmail] = useState("");
+    const [editingPostId, setEditingPostId] = useState<number|null>(null);
+    const [editContent, setEditContent] = useState<string|undefined>('');
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    
+
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -27,16 +41,21 @@ export default function Country() {
                     if (!response.ok) {
                         throw new Error('Failed to fetch posts');
                     }
-                    const data: Post[] = await response.json();
-                    setPosts(data);
+                    const data: { date: string; posts: Post[] }[] = await response.json(); // adjust based on actual data structure
+                    // Transform the array to an object with date keys
+                    const groupedByDate = data.reduce<GroupedPosts>((acc, item) => {
+                        acc[item.date] = item.posts;
+                        return acc;
+                    }, {});
+                    setGroupedPosts(groupedByDate);
                 } catch (error) {
                     console.error('Error:', error);
                 }
             }
         };
-
         fetchPosts();
     }, [country]);
+    
 
     useEffect(() => {
         const fetchImagePosts = async () => {
@@ -56,21 +75,101 @@ export default function Country() {
         fetchImagePosts();
     }, [country]);
 
-    // Sort posts by date
-    const sortedPosts = [...posts].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    const groupedPosts: { [date: string]: Post[] } = {};
-    sortedPosts.forEach((post) => {
-        const dateKey = new Date(post.date).toLocaleDateString();
-        if (!groupedPosts[dateKey]) {
-            groupedPosts[dateKey] = [];
-        }
-        groupedPosts[dateKey].push(post);
-    });
 
     // Determine if the post is an image post
     const isImagePost = (post: Post) => post.type === 'image';
 
-    return (
+    const handleEdit = (post: Post) => {
+        setEditingPostId(post._id);
+        setEditContent(post.content); // Initialize the input with the current content
+    };
+    
+    const handleSave = async () => {
+        // Send the PATCH request to the updated API endpoint
+        const response = await fetch(`https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts/${editingPostId}`, {
+            method: 'PATCH', // Change to PATCH, which is more appropriate for updates
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content: editContent }), // Only need to send the content
+        });
+    
+        if (response.ok) {
+            // Fetch the new post data from the response
+            const updatedPost = await response.json();
+    
+            // Update the local state to reflect the new content
+            const updatedGroupedPosts = { ...groupedPosts };
+            Object.keys(updatedGroupedPosts).forEach(date => {
+                updatedGroupedPosts[date] = updatedGroupedPosts[date].map(post => {
+                    if (post._id === editingPostId) {
+                        return { ...post, content: updatedPost.content }; // Update content from server response
+                    }
+                    return post;
+                });
+            });
+            setGroupedPosts(updatedGroupedPosts);
+            setEditingPostId(null); // Exit edit mode
+        } else {
+            // Handle errors, such as showing a message to the user
+            console.error('Failed to update the post');
+            // Optionally, retrieve error message from response and display
+            const error = await response.json();
+            alert(`Failed to update post: ${error.message}`);
+        }
+    };
+    
+    const handleCancel = () => {
+        setEditingPostId(null);
+        setEditContent("")
+    };
+
+    const handleDelete = async (postId:number) => {
+        const response = await fetch(`https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts/${postId}`, {
+            method: 'DELETE'
+        });
+    
+        if (response.ok) {
+            alert('Post deleted successfully');
+            // Remove the deleted post from state
+            const updatedGroupedPosts = { ...groupedPosts };
+            Object.keys(updatedGroupedPosts).forEach(date => {
+                updatedGroupedPosts[date] = updatedGroupedPosts[date].filter(post => post._id !== postId);
+            });
+            setGroupedPosts(updatedGroupedPosts);
+        } else {
+            const error = await response.json();
+            alert(`Failed to delete post: ${error.message}`);
+        }
+    };
+    
+
+    const autoResizeTextarea = () => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Set to scroll height
+        }
+    };
+
+    // Adjust the textarea height on content change
+    useEffect(() => {
+        autoResizeTextarea();
+    }, [editContent]);
+    
+
+    useEffect(() => {
+        getCurrentUserEmail()
+          .then(email => {
+            console.log(email)
+            setUserEmail(email);
+          })
+          .catch(error => {
+            console.error("Error fetching user email:", error);
+          });
+      }, []);
+
+      return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
             {imagePosts.length > 0 && <Film posts={imagePosts}/>}
@@ -81,19 +180,48 @@ export default function Country() {
                         <div key={dateKey}>
                             <h2>{dateKey}</h2>
                             {groupedPosts[dateKey].map((post, index) => (
-                                <div key={index} className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
-                                    {post.imageUrl && (
-                                        <div className={styles.imageContainer}>
-                                            <Image
-                                                src={post.imageUrl}
-                                                alt="Post"
-                                                width={800} height={400} 
-                                                layout="responsive"
-                                            />
-                                        </div>
+                                <Stack horizontal key={index} className={styles.containerEvent}>
+                                    <div className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
+                                        {post.imageUrl && (
+                                            <div className={styles.imageContainer}>
+                                                <Image
+                                                    src={post.imageUrl}
+                                                    alt="Post"
+                                                    width={800} height={400} 
+                                                    layout="responsive"
+                                                />
+                                            </div>
+                                        )}
+                                        {post.type === 'text' && (
+                                            editingPostId === post._id ?
+                                                <textarea
+                                                    ref={textareaRef}
+                                                    className={styles.postEventInput}
+                                                    value={editContent}
+                                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                                        setEditContent(e.target.value);
+                                                        autoResizeTextarea();
+                                                    }}
+                                                /> 
+                                            :
+                                            <p>{post.content}</p>
+                                        
+                                        )}
+                                    </div>
+                                    {userEmail === "codysims190@gmail.com" && (
+                                        <Stack className={styles.containerTools}>
+                                            {editingPostId === post._id ? (
+                                                <>
+                                                    <Icon iconName="cancel" className={styles.icon} onClick={() => handleCancel()}/>
+                                                    <Icon iconName="save" className={styles.icon} onClick={() => handleSave()}/>
+                                                </>
+                                            ) : (
+                                                <Icon iconName="edit" className={styles.icon} onClick={() => handleEdit(post)}/>
+                                            )}
+                                            <Icon iconName="delete" className={styles.icon} onClick={() => handleDelete(post._id)}/>
+                                        </Stack>
                                     )}
-                                    {post.type === 'text' && (<p>{post.content}</p>)}
-                                </div>
+                                </Stack>
                             ))}
                         </div>
                     ))}
@@ -101,4 +229,4 @@ export default function Country() {
             </div>
         </div>
     );
-}
+}    
