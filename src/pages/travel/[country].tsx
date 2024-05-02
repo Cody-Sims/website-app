@@ -67,40 +67,37 @@ export default function Country() {
         groupedPosts[dateKey].push(post);
     });
 
-    //TODO: Seperate Image Posts and Text Posts
-    //TODO: Add film reel
-
-
-
     // Determine if the post is an image post
     const isImagePost = (post: Post) => post.type === 'image';
 
     return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
-            <Film posts={imagePosts}/>
-            <div className={styles.timelineContainer}>
-                <div className={styles.timelineLine}></div>
-                {Object.keys(groupedPosts).map((dateKey) => (
-                    <div key={dateKey}>
-                        <h2>{dateKey}</h2>
-                        {groupedPosts[dateKey].map((post, index) => (
-                            <div key={index} className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
-                                {post.imageUrl && (
-                                    <div className={styles.imageContainer}>
-                                        <Image
-                                            src={post.imageUrl}
-                                            alt="Post"
-                                            width={800} height={400} 
-                                            layout="responsive"
-                                        />
-                                    </div>
-                                )}
-                                {post.type === 'text' && (<p>{post.content}</p>)}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+            {imagePosts.length > 0 && <Film posts={imagePosts}/>}
+            <div className={styles.container}>
+                <div className={styles.timelineContainer}>
+                    <div className={styles.timelineLine}></div>
+                    {Object.keys(groupedPosts).map((dateKey) => (
+                        <div key={dateKey}>
+                            <h2>{dateKey}</h2>
+                            {groupedPosts[dateKey].map((post, index) => (
+                                <div key={index} className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
+                                    {post.imageUrl && (
+                                        <div className={styles.imageContainer}>
+                                            <Image
+                                                src={post.imageUrl}
+                                                alt="Post"
+                                                width={800} height={400} 
+                                                layout="responsive"
+                                            />
+                                        </div>
+                                    )}
+                                    {post.type === 'text' && (<p>{post.content}</p>)}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

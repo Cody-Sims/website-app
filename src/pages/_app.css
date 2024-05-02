@@ -2,6 +2,7 @@
 :root {
   --background-color: var(--background-color-dark); /* Default to dark mode colors */
   --foreground-color: var(--foreground-color-dark); /* Default to dark mode colors */
+  --opposite-color: var(--opposite-color-dark); /* Default to dark mode colors */
   --text-color: var(--text-color-dark);
   --header-about-me: var(--header-about-me-dark);
   --text-about-me: var(--text-about-me-dark);
@@ -11,6 +12,7 @@
 :root {
   --background-color-dark: #0E0103;
   --foreground-color-dark: #121212;
+  --opposite-color-dark: rgb(237, 237, 237);
   --text-color-dark: rgb(171, 171, 171);
   --header-about-me-dark: #9ac0b0;
   --text-about-me-dark: #cca98d;
@@ -19,7 +21,8 @@
 /* Light theme color variables */
 :root {
   --background-color-light: rgb(237, 237, 237);
-  --foreground-color-light: rgb(207, 207, 207);
+  --foreground-color-light: rgb(226, 226, 226);
+  --opposite-color-light: #0E0103;
   --text-color-light: rgb(49, 49, 49);
   --header-about-me-light: #4d685d;
   --text-about-me-light: #7c5535;
@@ -29,10 +32,10 @@
 .darkMode {
   --background-color: var(--background-color-dark);
   --foreground-color: var(--foreground-color-dark);
+  --opposite-color: var(--opposite-color-dark);
   --text-color: var(--text-color-dark);
   --header-about-me: var(--header-about-me-dark);
   --text-about-me: var(--text-about-me-dark);
-
   background-color: var(--background-color);
 }
 
@@ -48,6 +51,7 @@
 .lightMode {
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);
+  --opposite-color: var(--opposite-color-light);
   --text-color: var(--text-color-light);
   --header-about-me: var(--header-about-me-light);
   --text-about-me: var(--text-about-me-light);

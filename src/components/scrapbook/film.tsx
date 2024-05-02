@@ -73,8 +73,14 @@ const Film: React.FC<FilmProps> = ({ posts }) => {
         };
     }, []);
 
+    function formatDate(dateString: string) {
+        const date = new Date(dateString);
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    }
+    
+
     const strips = window.innerWidth > 500 ? (
-        <div ref={stripContainerRef} className={styles.filmstrip}>
+        <div ref={stripContainerRef} className={`${styles.photoScrapbook} ${styles.filmstrip}`}>
             {posts.map((post, index) => (
                 <div key={index} className={styles.photo}>
                     {post.type === 'image' && post.imageUrl && (
@@ -82,13 +88,13 @@ const Film: React.FC<FilmProps> = ({ posts }) => {
                     )}
                     <Stack horizontal className={styles.caption}>
                         <div>{post.city}</div>
-                        <div>{post.date}</div>
+                        <div>{formatDate(post.date)}</div>
                     </Stack>
                 </div>
             ))}
         </div>
     ) : (
-        <div ref={stripContainerRef} className={styles.filmstrip}>
+        <div ref={stripContainerRef} className={`${styles.photoScrapbook} ${styles.filmstrip}`}>
             {posts.map((post, index) => (
                 <div key={index} className={styles.photo}>
                     {post.type === 'image' && post.imageUrl && (

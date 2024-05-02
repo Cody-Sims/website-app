@@ -1,10 +1,11 @@
 .container {
     background-color: inherit;
     padding-bottom: 12px;
+    min-height: 375px;
 }
 
 .filmstrip {
-    --background: rgba(0, 0, 0, 0.5);
+    --background: rgba(0, 0, 0, 0.7);
     --size: 10px;
     background-image: linear-gradient(to right, var(--background) var(--size), transparent var(--size)),
                       linear-gradient(to bottom, var(--background) var(--size), transparent var(--size)),
@@ -24,12 +25,14 @@
                          0 var(--size);
     padding: calc(var(--size) * 3) calc(var(--size) * 2.5);
     box-sizing: border-box;
+    min-height: 375px;
 }
 
 .photoScrapbook {
     background-color: white;
     margin: 24px 0;
     display: flex;
+    flex-direction: row;
     overflow-x: auto; /* Enable horizontal scrolling */
     gap: 20px;
 
@@ -46,7 +49,8 @@
 
 .photoScrapbook .photo img {
     object-fit: contain;
-    height: 300px;
+    height: 350px;
+    max-height: 350px;
     width: auto;
 }
 
@@ -59,6 +63,9 @@
     font-size: 0.8em;
     color: #666;
     z-index: 1; /* Ensure caption is above the pseudo-elements */
+
+    display: flex;
+    justify-content: space-between;
 }
 
 @media only screen and (max-width: 768px) {
