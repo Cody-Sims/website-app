@@ -86,7 +86,7 @@ export default function ScrapbookPage() {
                     content="This is a page dedicated to my friends and my college experience"
                     />
                 </Head>   
-                <Film/>
+                <Film posts={[]}/>
                 <Stack className={styles.containerBio}>
                     <Stack className={styles.containerBio2}>
                         <h1>

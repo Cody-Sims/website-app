@@ -3,7 +3,6 @@ import styles from '../../styles/film.module.css'; // Assuming your CSS file is 
 import Image from 'next/image';
 import { Stack } from '@fluentui/react';
 
-
 interface Post {
     date: string;
     type: 'image' | 'text';
@@ -16,7 +15,7 @@ interface FilmProps {
     posts: Post[];
 }
 
-const Film: React.FC<FilmProps> = ({ posts }) => {
+const Film: React.FC<FilmProps> = ({ posts = []}) => {
     const stripContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
