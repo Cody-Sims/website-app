@@ -101,7 +101,7 @@ const Film: React.FC<FilmProps> = ({ posts = []}) => {
                     )}
                     <Stack horizontal className={styles.caption}>
                         <div>{post.city}</div>
-                        <div>{post.date}</div>
+                        <div>{formatDate(post.date)}</div>
                     </Stack>
                 </div>
             ))}
