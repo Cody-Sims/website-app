@@ -90,7 +90,8 @@ const Travel = ({ isLightMode }: TravelProps) => {
         ['Thailand', 2, 'Trips: 2'],
         ['United Kingdom', 1, 'Trips: 1'],
         ['Ireland', 1, 'Trips: 1'],
-        ['Japan', 1, 'Trips: 1']
+        ['Japan', 1, 'Trips: 1'],
+        ['Colombia', 1, 'Trips: 1']
     ]);      
 
     const chartOptions = isLightMode ? lightModeOptions : darkModeOptions;

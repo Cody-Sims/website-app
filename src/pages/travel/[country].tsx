@@ -169,6 +169,16 @@ export default function Country() {
           });
       }, []);
 
+      function formatDate(date: string) {
+        // Split the date key into year, month, and day
+        var parts = date.split("-");
+        
+        // Rearrange the parts to form MM/DD/YYYY format
+        var formattedDate = parts[1] + "/" + parts[2] + "/" + parts[0];
+        
+        return formattedDate;
+    }
+
       return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
@@ -178,7 +188,7 @@ export default function Country() {
                     <div className={styles.timelineLine}></div>
                     {Object.keys(groupedPosts).map((dateKey) => (
                         <div key={dateKey}>
-                            <h2>{dateKey}</h2>
+                            <h2>{formatDate(dateKey)}</h2>
                             {groupedPosts[dateKey].map((post, index) => (
                                 <Stack horizontal key={index} className={styles.containerEvent}>
                                     <div className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>

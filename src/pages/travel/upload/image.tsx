@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@fluentui/react';
 import Cookies from 'js-cookie';
-import styles from '../../../styles/createPost.module.css';
+import styles from '../../../styles/createImage.module.css';
 
 const ImageUploader = dynamic(() => import('../../../components/imageUploader'), { ssr: false });
 
