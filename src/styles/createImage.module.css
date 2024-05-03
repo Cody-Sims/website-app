@@ -1,7 +1,8 @@
 .container {
+    display: flex;
     align-items: center;
     text-align: center;
-    width: 50vw;
+    width: 100vw;
     min-height: 100vh;
 }
 
