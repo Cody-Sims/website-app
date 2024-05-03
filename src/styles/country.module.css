@@ -153,4 +153,8 @@
     .timelineLine {
         left: 14px; 
     }
+    .postEventInput {
+        width: 96vw;
+        font-size: 16px;
+    }
 }

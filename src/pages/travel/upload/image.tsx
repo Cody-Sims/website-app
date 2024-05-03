@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@fluentui/react';
 import Cookies from 'js-cookie';
@@ -7,40 +7,59 @@ import styles from '../../../styles/createPost.module.css';
 const ImageUploader = dynamic(() => import('../../../components/imageUploader'), { ssr: false });
 
 export default function CreatePost() {
-    // Retrieve initial values from cookies or default to empty strings
     const [manualCity, setManualCity] = useState(() => Cookies.get('city') || '');
     const [manualCountry, setManualCountry] = useState(() => Cookies.get('country') || '');
-    const [imageUrl, setImageUrl] = useState('');
     const [textPostStatus, setTextPostStatus] = useState('');
 
-    const submitPost = async (imageUrl: string) => {
-        let postData = {
-            type: 'image',
-            imageUrl: imageUrl,
-            manualCity: manualCity,
-            manualCountry: manualCountry,
-        };
+    const submitPost = async (imageUrl: string, originalImage: File | null) => {
+        if (originalImage) {
+            const formData = new FormData();
+            formData.append('image', originalImage);
+            const convertEndpoint = originalImage.type === 'image/heic' ? '/api/convert-heic' : '/api/parse-exif';
+            try {
+                const exifResponse = await fetch(`https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com${convertEndpoint}`, {
+                    method: 'POST',
+                    body: formData,
+                });
 
-        try {
-            const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(postData),
-            });
+                if (!exifResponse.ok) {
+                    const errorText = await exifResponse.text();
+                    throw new Error(errorText || 'Failed to extract EXIF data');
+                }
 
-            if (!response.ok) throw new Error('Failed to submit post');
-            setTextPostStatus('Post submitted successfully!');
-            Cookies.set('city', manualCity, { expires: 7 }); // Expires in 7 days
-            Cookies.set('country', manualCountry, { expires: 7 }); // Expires in 7 days
-            setImageUrl('');
-        } catch (error) {
-            setTextPostStatus('Error submitting post');
-            console.error('Error:', error);
+                const exifData = await exifResponse.json();
+                let postData = {
+                    type: 'image',
+                    imageUrl: imageUrl,
+                    manualCity: manualCity,
+                    manualCountry: manualCountry,
+                    latitude: exifData.latitude,
+                    longitude: exifData.longitude,
+                    date: new Date(exifData.date).toISOString()
+                };
+
+                const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(postData),
+                });
+
+                if (!response.ok) throw new Error('Failed to submit post');
+                setTextPostStatus('Post submitted successfully!');
+                Cookies.set('city', manualCity, { expires: 7 });
+                Cookies.set('country', manualCountry, { expires: 7 });
+
+            } catch (error: any) {
+                setTextPostStatus('Error submitting post: ' + error.message);
+                console.error('Error:', error);
+            }
+        } else {
+            setTextPostStatus('No image data available to submit');
         }
     };
 
-    const handleImageUploadSuccess = (uploadedImageUrl: string) => {
-        submitPost(uploadedImageUrl);
+    const handleImageUploadSuccess = (uploadedImageUrl: string, originalImage: File | null) => {
+        submitPost(uploadedImageUrl, originalImage);
     };
 
     return (
@@ -61,7 +80,7 @@ export default function CreatePost() {
                         onChange={(e) => setManualCountry(e.target.value)}
                         />
                 </Stack>
-                <Stack style={{maxWidth:"90vw"}}>
+                <Stack style={{ maxWidth: "90vw" }}>
                     <ImageUploader onUpload={handleImageUploadSuccess} />
                 </Stack>
                 {textPostStatus && <p>{textPostStatus}</p>}

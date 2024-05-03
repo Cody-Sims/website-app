@@ -4,7 +4,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import Image from 'next/image';
 
 interface ImageUploaderProps {
-    onUpload: (url: string) => void;
+    onUpload: (url: string, imageBuffer: File | null) => void;
 }
 
 interface Crop extends PercentCrop {
@@ -17,18 +17,29 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
     const [croppedImage, setCroppedImage] = useState<string | null>(null);
     const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null); // Create a ref for the file input
+    const [originalImage, setOriginalImage] = useState<File | null>(null);
 
 
     const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            setOriginalImage(file); // Store the file directly
+            // Use FileReader to read the file as a data URL for display purposes
             const reader = new FileReader();
-            reader.addEventListener('load', () => setSrc(reader.result as string));
-            reader.addEventListener('error', () => {
+            reader.onload = () => {
+                setSrc(reader.result as string);
+            };
+            reader.onerror = () => {
+                console.error('Error occurred while reading the file.');
                 alert('Error occurred while reading the file.');
-            });
-            reader.readAsDataURL(e.target.files[0]);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            console.log('No file selected');
         }
     };
+
+    
     
 
     const onCropChange = (crop: PixelCrop, percentageCrop: PercentCrop) => {
@@ -106,29 +117,35 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
     };    
 
     const uploadImage = async (croppedImageBlob: Blob) => {
+        console.log('Attempting to upload, originalImage state:', originalImage); // Debug log to check state
+        if (!originalImage) {
+            console.error('Original image data is null');
+            alert('Original image data is not loaded yet.');
+            return;
+        }
+    
         const formData = new FormData();
         formData.append('image', croppedImageBlob);
-
+    
         try {
             const uploadResponse = await fetch("https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/upload-image", {
                 method: 'POST',
                 body: formData,
             });
-
+    
             if (!uploadResponse.ok) {
                 const errorMessage = await uploadResponse.text();
                 throw new Error(`Error during upload: ${errorMessage}`);
             }
-
+    
             const { imageUrl } = await uploadResponse.json();
-            onUpload(imageUrl);
-            setSrc(null)
-            setCrop({ unit: '%', width: 30, height: 30, aspect: 16 / 9, x: 0, y: 0 })
-            setCroppedImage(null)
-            setImageRef(null)
-             // Clear the input file
+            onUpload(imageUrl, originalImage);
+            setSrc(null);
+            setCrop({ unit: '%', width: 30, height: 30, aspect: 16 / 9, x: 0, y: 0 });
+            setCroppedImage(null);
+            setImageRef(null);
             if (fileInputRef.current) {
-                fileInputRef.current.value = '';
+                fileInputRef.current.value = '';  // Clear the input file
             }
         } catch (error) {
             if (error instanceof Error) {
@@ -139,7 +156,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
                 alert('An unexpected error occurred');
             }
         }
-    };    
+    };
 
     const onImageLoaded = (image: HTMLImageElement) => {
         setImageRef(image);
