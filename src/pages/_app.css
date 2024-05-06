@@ -6,6 +6,7 @@
   --text-color: var(--text-color-dark);
   --header-about-me: var(--header-about-me-dark);
   --text-about-me: var(--text-about-me-dark);
+  --shadow-color: var(--shadow-color-dark);
 }
 
 /* Dark theme color variables */
@@ -16,6 +17,7 @@
   --text-color-dark: rgb(171, 171, 171);
   --header-about-me-dark: #9ac0b0;
   --text-about-me-dark: #cca98d;
+  --shadow-color-dark: rgba(255, 255, 255, 0.15);
 }
 
 /* Light theme color variables */
@@ -26,6 +28,7 @@
   --text-color-light: rgb(49, 49, 49);
   --header-about-me-light: #4d685d;
   --text-about-me-light: #7c5535;
+  --shadow-color-light: rgba(0,0,0, .15);
 }
 
 /* Dark theme styles */
@@ -37,6 +40,7 @@
   --header-about-me: var(--header-about-me-dark);
   --text-about-me: var(--text-about-me-dark);
   background-color: var(--background-color);
+  --shadow-color: var(--shadow-color-dark);
 }
 
 .darkMode p,
@@ -55,8 +59,8 @@
   --text-color: var(--text-color-light);
   --header-about-me: var(--header-about-me-light);
   --text-about-me: var(--text-about-me-light);
-
   background-color: var(--background-color);
+  --shadow-color: var(--shadow-color-light);
 }
 
 .lightMode p,

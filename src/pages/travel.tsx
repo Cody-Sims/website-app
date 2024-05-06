@@ -82,7 +82,7 @@ const Travel = ({ isLightMode }: TravelProps) => {
 
     const data = window.google.visualization.arrayToDataTable([
         ['Country', 'Trips', { role: 'tooltip', type: 'string', p: { html: true } }],
-        ['United States', -1, 'Trips: -1'],
+        ['United States', -1, 'Trips: I live here lol'],
         ['Canada', 3, 'Trips: 3'],
         ['Spain', 3, 'Trips: 3'],
         ['Morocco', 1, 'Trips: 1'],

@@ -58,7 +58,7 @@ export default function CreatePost() {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setLatLong({ lat: latitude, long: longitude });
-                setLocation(`${latitude.toFixed(3)}, ${longitude.toFixed(3)}`);
+                setLocation(`${latitude}, ${longitude}`);
             },
             (error) => {
                 console.error('Geolocation Error:', error);

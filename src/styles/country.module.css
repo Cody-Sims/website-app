@@ -21,6 +21,10 @@
     margin: 24px 0;
 }
 
+.containerEvent {
+    max-width: 75%;
+}
+
 .timelineLine {
     position: absolute;
     left: 23px;
@@ -36,18 +40,16 @@
 }
 
 .imageEvent img {
-    box-shadow: 2px 2px 8px 4px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 8px 4px var(--shadow-color);
 }
-
-
 
 
 .postEvent {
     position: relative;
     margin-bottom: 30px;
-    box-shadow: 0 0 8px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 0 8px 4px var(--shadow-color);
     max-width: 50vw;
-    background-color: rgb(234, 234, 234);
+    background-color: var(--foreground-color);
     margin-top: 12px;
     padding: 6px 6px 2px 18px;
 }
@@ -66,7 +68,7 @@
 .postEventInput {
     background-color: inherit;
     border: none;
-    width: 48vw;
+    width: 100%;
     font-size: 24px;
     resize: none; /* Prevent manual resizing */
     overflow: hidden; /* Hide scrollbar */
@@ -89,7 +91,7 @@
 }
 
 .imageContainer {
-    width: 400px; /* Fixed width */
+    max-width: 50vw; /* Fixed width */
     height: auto; /* Natural height */
     margin-bottom: 10px;
 }
@@ -122,6 +124,22 @@
     font-size: 24px;
 }
 
+.toggleButton {
+    align-items: flex-end;
+    align-self: flex-end;
+    width: 25%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+    margin-bottom: 24px;
+}
+
 /* Responsive Design for smaller screens */
 @media (max-width: 768px) {
     .containerEvent {
@@ -129,7 +147,7 @@
     }
     
     .imageContainer {
-        width: 100%; /* Full width on smaller screens */
+        max-width: 90%; /* Full width on smaller screens */
     }
 
     .containerEvent .postEvent{

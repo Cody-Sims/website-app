@@ -28,7 +28,10 @@ export default function Country() {
     const [userEmail, setUserEmail] = useState("");
     const [editingPostId, setEditingPostId] = useState<number|null>(null);
     const [editContent, setEditContent] = useState<string|undefined>('');
+    const [postContent, setPostContent] = useState<string|undefined>("What's happening...?");
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const [latLong, setLatLong] = useState({ lat: 0.0, long: 0.0 }); 
+    const [textPostStatus, setTextPostStatus] = useState('');
 
     
 
@@ -179,12 +182,60 @@ export default function Country() {
         return formattedDate;
     }
 
-      return (
+    const submitPost = async () => {
+        let postData = {
+            type: "text",
+            content: postContent,
+            date: new Date(),
+            latitude: latLong.lat, 
+            longitude: latLong.long
+        };
+
+        try {
+            const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData),
+            });
+            if (!response.ok) throw new Error('Failed to submit post');
+        } catch (error) {
+            setTextPostStatus('Error submitting post');
+            console.error('Error:', error);
+        }
+    };
+
+    useEffect(() => {
+        if(userEmail === "codysims190@gmail.com"){
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLatLong({ lat: latitude, long: longitude });
+                },
+                (error) => {
+                    console.error('Geolocation Error:', error);
+                    setTextPostStatus('Unable to retrieve location');
+                }
+            );
+        }
+    }, [userEmail]);
+
+    return (
         <div className={styles.countryContainer}>
             <h1>{country}</h1>
             {imagePosts.length > 0 && <Film posts={imagePosts}/>}
             <div className={styles.container}>
                 <div className={styles.timelineContainer}>
+                    {userEmail === "codysims190@gmail.com" &&
+                        <Stack className={styles.containerEvent}>  
+                            <div className={styles.postEvent} style={{display:"flex", flexDirection: "column"}}>
+                                <textarea
+                                    ref={textareaRef}
+                                    className={styles.postEventInput}
+                                    value={postContent}
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {setPostContent(e.target.value); autoResizeTextarea();}}/>
+                                <button onClick={submitPost} className={styles.toggleButton}> Submit Post </button> 
+                            </div> 
+                        </Stack>}
                     <div className={styles.timelineLine}></div>
                     {Object.keys(groupedPosts).map((dateKey) => (
                         <div key={dateKey}>
@@ -193,14 +244,15 @@ export default function Country() {
                                 <Stack horizontal key={index} className={styles.containerEvent}>
                                     <div className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
                                         {post.imageUrl && (
-                                            <div className={styles.imageContainer}>
+                                           
                                                 <Image
                                                     src={post.imageUrl}
                                                     alt="Post"
                                                     width={800} height={400} 
                                                     layout="responsive"
+                                                    className={styles.imageContainer}
                                                 />
-                                            </div>
+                                           
                                         )}
                                         {post.type === 'text' && (
                                             editingPostId === post._id ?
