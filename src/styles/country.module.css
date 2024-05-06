@@ -41,6 +41,7 @@
 
 .imageEvent img {
     box-shadow: 2px 2px 8px 4px var(--shadow-color);
+    border-radius: 3%;
 }
 
 
@@ -52,6 +53,7 @@
     background-color: var(--foreground-color);
     margin-top: 12px;
     padding: 6px 6px 2px 18px;
+    border-radius: 15px;
 }
 
 .postEvent:before{
