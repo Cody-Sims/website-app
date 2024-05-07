@@ -74,6 +74,7 @@
     font-size: 24px;
     resize: none; /* Prevent manual resizing */
     overflow: hidden; /* Hide scrollbar */
+    color: var(--text-color);
 }
 
 .postEvent p {
@@ -164,5 +165,12 @@
     .postEventInput {
         width: 100%;
         font-size: 16px;
+    }
+    .toggleButton {
+        width: 40%;
+        height: 24px;
+        font-size: 12px;
+        padding: 2px;
+        margin-bottom: 12px;
     }
 }
