@@ -314,6 +314,7 @@
     gap: 0px;
     align-items: center;
     margin: 0 24px;
+    width: 85vw;
   }
 
   .containerAboutMeBio h1 {
@@ -326,7 +327,7 @@
   }
 
   .containerAboutMe p {
-    font-size: 1.2em;
+    font-size: 1.5em;
   }
 
   .resumeBut {
@@ -340,15 +341,13 @@
   .workCard {
     margin: 24px 0 0 0;
     padding: 12px 0;
-    max-width: 50vw;
+    max-width: 60vw;
   }
 
   .workCard img {
     max-width: 80%;
     max-height: 200px;
   }
-
-  
 
   .containerWork h2 {
     font-size: 2em;

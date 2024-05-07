@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Film from '@/components/scrapbook/film';
 import { getCurrentUserEmail } from '../../../firebase-config';
 import { Icon, Stack } from '@fluentui/react';
+import Head from 'next/head';
 
 // Define a TypeScript interface for the post structure
 interface Post {
@@ -221,6 +222,13 @@ export default function Country() {
 
     return (
         <div className={styles.countryContainer}>
+            <Head>
+                <title>{country}</title>
+                <meta
+                name="description"
+                content={`Check out my travels through ${country}`}
+                />
+            </Head>
             <h1>{country}</h1>
             {imagePosts.length > 0 && <Film posts={imagePosts}/>}
             <div className={styles.container}>

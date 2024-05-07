@@ -100,20 +100,8 @@
 
 .containerTools {
     display: flex;
-    box-shadow: 0 0 8px 4px rgba(0,0,0,0.15);
-    background-color: rgb(234, 234, 234);
-    padding: 12px;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-top: 12px;
-    margin-left: 30px;
-}
-
-.containerTools {
-    display: flex;
-    box-shadow: 0 0 8px 4px rgba(0,0,0,0.15);
-    background-color: rgb(234, 234, 234);
+    box-shadow: 0 0 8px 4px var(--shadow-color);
+    background-color: var(--foreground-color);
     padding: 12px;
     height: 100%;
     align-items: center;

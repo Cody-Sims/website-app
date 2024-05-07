@@ -15,7 +15,7 @@ type TravelProps = {
 
 const lightModeOptions = {
   backgroundColor: 'rgb(237, 237, 237)',
-  datalessRegionColor: '#f8f9fa',
+  datalessRegionColor: '#FFFFFF',
   defaultColor: '#adb5bd',
   colorAxis: {
     colors: ['#8c98a4', '#495057']
@@ -26,13 +26,13 @@ const lightModeOptions = {
     isHtml: true
   },
   legend: 'none',
-  borderColor: '#dee2e6',
-  borderWidth: 1,
+  borderColor: '#181818',
+  borderWidth: 5,
 };
 
 const darkModeOptions = {
   backgroundColor: '#0E0103',
-  datalessRegionColor: '#1f2022',
+  datalessRegionColor: '#6D6D6D',
   defaultColor: '#6c757d',
   colorAxis: {
     colors: ['#44687d', '#c4d6e7']
@@ -44,8 +44,12 @@ const darkModeOptions = {
   },
   legend: 'none',
   borderColor: '#2f2f2f',
-  borderWidth: 1,
+  borderWidth: 5,
 };
+
+
+const countries = ['United States', 'Canada', 'Spain', 'Morocco', 'Vietnam', 'Thailand', 'United Kingdom', 'Ireland', 'Japan', 'Colombia']
+
 
 
 const Travel = ({ isLightMode }: TravelProps) => {
@@ -93,6 +97,7 @@ const Travel = ({ isLightMode }: TravelProps) => {
         ['Japan', 1, 'Trips: 1'],
         ['Colombia', 1, 'Trips: 1']
     ]);      
+
 
     const chartOptions = isLightMode ? lightModeOptions : darkModeOptions;
     const trigger = window.innerWidth < 768 ? 'selection' : 'focus';
@@ -174,6 +179,11 @@ const Travel = ({ isLightMode }: TravelProps) => {
       <h2>Countries Visited: 8</h2>
       <div className={styles.travelContainer}>
         <div id="regions_div" className={styles.regionsDiv}/>
+        <div className={styles.staticLinks}>
+                    {countries.map(country => (
+                        <Link key={country} href={`/travel/${country}`} passHref/>
+                    ))}
+        </div>
       </div>
     </div>
   );

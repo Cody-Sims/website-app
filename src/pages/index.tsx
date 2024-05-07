@@ -9,7 +9,7 @@ export default function IndexPage() {
         <title>Cody Sims</title>
         <meta
           name="description"
-          content="Explore my journey as a Full Stack Developer and Blogger from Brown University. Discover innovative projects, professional insights from internships at Microsoft and Cisco, and thrilling travel stories"
+          content="Hey! I'm Cody Sims, and I am a Full Stack Developer at Microsoft and a Brown University Alumni. In my free time, I love to travel"
         />
       </Head>
       <Home />;
