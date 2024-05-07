@@ -14,7 +14,7 @@ type TravelProps = {
 };
 
 const lightModeOptions = {
-  backgroundColor: 'rgb(237, 237, 237)',
+  backgroundColor: 'rgb(226, 226, 226)',
   datalessRegionColor: '#FFFFFF',
   defaultColor: '#adb5bd',
   colorAxis: {

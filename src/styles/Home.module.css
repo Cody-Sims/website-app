@@ -47,18 +47,16 @@
 
 /* Work Card Styles */
 .workCard {
+  display: flex;
+  flex-direction: column;
   max-width: 350px;
-  max-height: 600px;
+  max-height: 650px;
   border: 1px solid #ccc;
   border-radius: 25px;
   padding: 24px;
   margin: 72px 12px;
   box-shadow: 0 0 6px 4px var(--shadow-color);
-  background-color: var(--foreground-color);
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  perspective: 1000px
 
 }
 
@@ -95,7 +93,8 @@
 }
 
 .workCard img {
-  min-width: 100%;
+  min-height: 300px;
+  max-height: 300px;
   margin-bottom: 12px;
 }
 
@@ -342,15 +341,17 @@
     flex-direction: column;
   }
 
+
   .workCard {
     margin: 24px 0 0 0;
     padding: 12px;
     max-width: 60vw;
+    max-height: 50%;
   }
 
   .workCard img {
-    max-width: 80%;
-    max-height: 200px;
+    min-width: 0;
+    min-height: 0;
   }
 
   .containerWork h2 {

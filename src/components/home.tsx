@@ -145,7 +145,7 @@ function WorkExperience() {
                 <div className={styles.workCardFront}>
                     <h3>{card.Role}</h3>
                     <p className={styles.workCardTitle}>{card.Company}</p>
-                    <Image src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
+                    <Image className={styles.workCardImage} src={card.Logo} alt="Company Logo" width={200} height={100} layout="responsive" />
                 </div>
                 <div className={styles.workCardBack}>
                     <div>

@@ -23,7 +23,7 @@
 /* Light theme color variables */
 :root {
   --background-color-light: rgb(237, 237, 237);
-  --foreground-color-light: rgb(226, 226, 226);
+  --foreground-color-light: rgb(226, 226, 226); 
   --opposite-color-light: #0E0103;
   --text-color-light: rgb(49, 49, 49);
   --header-about-me-light: #4d685d;
