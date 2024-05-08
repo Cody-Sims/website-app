@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import styles from '../styles/travel.module.css';
+import styles from '../styles/travel/travel.module.css';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { getCurrentUserEmail } from '../../firebase-config';
 import { Stack } from '@fluentui/react';

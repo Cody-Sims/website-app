@@ -1,13 +1,14 @@
 .containerBlogPost{
     display: flex;
     flex-direction: column;
-    margin: 0 30%;
+    margin: 0 20%;
     background-color: var(--foreground-color);
     min-height: 100vh;
 }
 
 .containerBlogPost img {
-    max-height: 50vh;      /* This maintains the aspect ratio */
+    min-width: 60vw;
+    max-height: 60vh;      /* This maintains the aspect ratio */
     object-fit: cover; /* This ensures the image covers the space without distorting */
     margin: 0 auto;
 }

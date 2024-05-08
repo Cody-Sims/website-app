@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import { auth } from '../../firebase-config'; 
-import styles from '../styles/login.module.css'; 
+import styles from '../styles/components/login.module.css'; 
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -30,12 +30,42 @@ const Login: React.FC = () => {
             if (isRegistering) {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 console.log('User registered:', userCredential.user);
+                makeUserAdmin(userCredential.user.uid); // Make the new user an admin
             } else {
-                await signInWithEmailAndPassword(auth, email, password);
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                makeUserAdmin(userCredential.user.uid); // Make the existing user an admin
             }
         } catch (error: any) {
             setError(error.message);
             console.error('Authentication error:', error);
+        }
+    };
+
+    const makeUserAdmin = async (uid: string) => {
+        try {
+            const idToken = await auth.currentUser?.getIdToken(true);
+            if (!idToken) {
+                console.error('Error: No valid ID token found');
+                return;
+            }
+
+            const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/set-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${idToken}`
+                },
+                body: JSON.stringify({ uid })
+            });
+
+            if (response.ok) {
+                console.log(`User ${uid} is now an admin.`);
+            } else {
+                const errorMessage = await response.text();
+                console.error(`Error: ${errorMessage}`);
+            }
+        } catch (error: any) {
+            console.error('Error making user admin:', error.message || error);
         }
     };
 

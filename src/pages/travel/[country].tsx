@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/country.module.css';
+import styles from '../../styles/travel/country.module.css';
 import Image from 'next/image';
 import Film from '@/components/scrapbook/film';
 import { getCurrentUserEmail } from '../../../firebase-config';

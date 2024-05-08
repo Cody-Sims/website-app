@@ -1,4 +1,4 @@
-import styles from '../styles/loading_screen.module.css'
+import styles from '../styles/components/loading_screen.module.css'
 import React from 'react'
 
 export default function LoadingScreen() {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
-import styles from "../../styles/blogPost.module.css";
+import styles from "../../styles/blog/blogPost.module.css";
 import { Stack } from "@fluentui/react";
 import Image from "next/image";
 import LoadingScreen from "@/components/loading_screen";
@@ -30,9 +30,9 @@ export default function BlogPost() {
     return (
         <div className={styles.containerBlogPost}>
             {post ? (
-                <>  
+                <div className={styles.container}>  
                     <Image src={post.img} alt={post.title} className={styles.blogPostImage} width={200} height={100} layout="responsive" />
-                    <Stack horizontal style={{ padding: "0 24px" }}>
+                    <Stack horizontal style={{ padding: "0 24px" }} className={styles.containerBlogContent}>
                         <Stack.Item>
                             <h2 className={styles.blogPostAuthor}>{post.author}</h2>
                         </Stack.Item>
@@ -42,7 +42,7 @@ export default function BlogPost() {
                     </Stack>
                     <h1 className={styles.blogPostTitle}>{post.title}</h1>
                     <p className={styles.blogPostContent}>{post.content}</p>
-                </>
+                </div>
             ) : (
                 <LoadingScreen/>
             )}

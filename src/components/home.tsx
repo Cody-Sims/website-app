@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Stack} from '@fluentui/react/lib/Stack';
-import styles from "../styles/Home.module.css"
+import styles from "../styles/components/Home.module.css"
 import LoadingScreen from "./loading_screen";
 import Image from "next/image";
 import Link from "next/link";

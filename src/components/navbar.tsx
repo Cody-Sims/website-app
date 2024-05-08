@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import styles from '../styles/navbar.module.css';
+import styles from '../styles/components/navbar.module.css';
 
 type NavbarProps = {
     onToggleTheme: () => void;

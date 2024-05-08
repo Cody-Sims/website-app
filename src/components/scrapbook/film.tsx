@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '../../styles/film.module.css'; // Assuming your CSS file is named PhotoScrapbook.css
+import styles from '../../styles/components/film.module.css'; // Assuming your CSS file is named PhotoScrapbook.css
 import Image from 'next/image';
 import { Stack } from '@fluentui/react';
 

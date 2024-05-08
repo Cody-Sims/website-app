@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from 'react';
-import styles from '../styles/blog.module.css';
+import styles from '../styles/blog/blog.module.css';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -86,13 +86,13 @@ const Blog: FC<BlogHomePageProps> = ({ blogPostsArray }) => {
                     <div className={styles.blogCardImage} style={{ backgroundImage: `url(${card.img})` }}>
                         <div className={styles.blogCardHoverContent}>
                             <h2 className={styles.blogCardTitle}>{card.title}</h2>
-                            <p className={styles.blogCardExcerpt}>{card.description}</p>
+                            {/* <p className={styles.blogCardExcerpt}>{card.description}</p> */}
                         </div>
                     </div>
                     <div className={styles.blogCardFooter}>
                         <span className={styles.blogCardAuthor}>{card.author}</span>
                         <span className={styles.blogCardDate}>{card.datePosted}</span>
-                        <span className={styles.blogCardCategory}>{card.category}</span>
+                        {/* <span className={styles.blogCardCategory}>{card.category}</span> */}
                     </div>
                 </>
             )}
@@ -113,7 +113,10 @@ const Blog: FC<BlogHomePageProps> = ({ blogPostsArray }) => {
         const sortedCards = sortByDate(blogCards);
         return (
           <div className={styles.blogPostsGrid}>
-            {sortedCards.map(card => renderCard(card, sortedCards.indexOf(card) === 0))}
+            {sortedCards.map((card, index) => {
+              const isSpecialCard = index === 0 || index % 11 === 0;
+              return renderCard(card, isSpecialCard);
+            })}
           </div>
         );
       }

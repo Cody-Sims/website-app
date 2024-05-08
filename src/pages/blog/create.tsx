@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@fluentui/react';
-import styles from '../../styles/createBlog.module.css'; // Adjust the import path to your actual CSS module file
-import Blog from '../blog';
+import styles from '../../styles/blog/createBlog.module.css'; // Adjust the import path to your actual CSS module file
 import Image from 'next/image';
+import { auth } from '../../../firebase-config';
 
 
 // Dynamic import for ImageUploader (if needed)
@@ -40,44 +40,59 @@ function PostBlog() {
     };
 
     const handleSubmit = async () => {
+        // Get the current date as ISO string
         const currentDate = new Date().toISOString();
+    
+        // Create a blog post object
         const blogPost = {
-            _id:null,
+            _id: null,
             title,
             description,
             content,
             author,
             category,
-            tags: tags.split(',').map(tag => tag.trim()), // Assuming tags are comma separated
+            tags: tags.split(',').map(tag => tag.trim()), // Assuming tags are comma-separated
             img: previewImg,
             datePosted: currentDate
         };
-
+    
+        // Get the Firebase Auth token from the currently signed-in user
         try {
+            const currentUser = auth.currentUser;
+            if (!currentUser) {
+                setStatusMessage("Error: User not authenticated.");
+                return;
+            }
+    
+            const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+    
+            // Proceed with the fetch request
             const response = await fetch('https://gentle-lowlands-37866-11b26cec28c1.herokuapp.com/api/blog', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${idToken}` // Include the Firebase Auth token
                 },
                 body: JSON.stringify(blogPost)
             });
-
+    
             if (response.status === 201) {
                 setStatusMessage('Blog post successfully added.');
             } else {
                 const errorMessage = await response.text();
                 setStatusMessage(`Error: ${errorMessage}`);
             }
+    
         } catch (error) {
             if (error instanceof Error) {
-                // Now TypeScript knows that 'error' is of type Error
                 setStatusMessage(`Error: ${error.message}`);
             } else {
-                // Handle cases where the error is not an instance of Error
                 setStatusMessage("An unknown error occurred");
             }
         }
     };
+
+    
 
     const handlePreview = useCallback(() => {
         const currentDate = new Date().toISOString();
@@ -122,7 +137,6 @@ function PostBlog() {
     
     return (
         <Stack>
-            {previewImg && <Blog blogPostsArray={blogPostsArray} />} {/* Assuming Blog component doesn't need props */}
             <Stack className={styles.containerCreatePost} style={{ alignItems: 'center' }}>
                 <Stack className={styles.blogSection} style={{ width: "50vw" }}>
                     <Stack style={{ marginBottom: "0px", padding: "0 5%" }}>

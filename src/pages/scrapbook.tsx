@@ -1,5 +1,5 @@
 import { Stack} from '@fluentui/react/lib/Stack';
-import styles from "../styles/scrapbook.module.css"
+import styles from "../styles/scrapbook/scrapbook.module.css"
 import React from 'react';
 import Head from 'next/head';
 import CardOne from '@/components/scrapbook/cardOne';
