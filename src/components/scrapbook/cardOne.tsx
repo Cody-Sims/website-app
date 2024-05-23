@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from "../../styles/cardOne.module.css"
+import styles from "../../styles/scrapbook/cardOne.module.css"
 import Image from 'next/image';
 
 

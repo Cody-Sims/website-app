@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "../../styles/cardTwo.module.css"
+import styles from "../../styles/scrapbook/cardTwo.module.css"
 import Image from 'next/image';
 import { Stack } from '@fluentui/react';
 

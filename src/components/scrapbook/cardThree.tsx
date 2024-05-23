@@ -2,7 +2,7 @@
 // Flip one and it overlays a description on all of them
 
 import React, { useState } from 'react';
-import styles from "../../styles/cardThree.module.css"
+import styles from "../../styles/scrapbook/cardThree.module.css"
 import Image from 'next/image';
 import { Stack } from '@fluentui/react';
 

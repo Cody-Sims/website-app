@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Stack } from '@fluentui/react';
-import styles from '../../../travel/upload/styles/createPost.module.css';
+import styles from '../../../styles/travel/upload/createPost.module.css';
 
 export default function CreatePost() {
     const [textPost, setTextPost] = useState('');
