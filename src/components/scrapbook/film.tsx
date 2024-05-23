@@ -177,22 +177,8 @@ const Film: React.FC<FilmProps> = ({ posts = []}) => {
 
     const strips = window.innerWidth > 500 ? (
         <div ref={stripContainerRef} className={`${styles.photoScrapbook} ${styles.filmstrip}`}>
-            {posts.map((post, index) => (
-                <div key={index} className={styles.photo}>
-                    {post.type === 'image' && post.imageUrl && (
-                        <Image src={post.imageUrl} alt="A related caption" width={200} height={300} />
-                    )}
-                    <Stack horizontal className={styles.caption}>
-                        <div>{post.city}</div>
-                        <div>{formatDate(post.date)}</div>
-                    </Stack>
-                </div>
-            ))}
-        </div>
-    ) : (
-        <div ref={stripContainerRef} className={`${styles.photoScrapbook} ${styles.filmstrip}`}>
             {userEmail == "codysims190@gmail.com" && (
-                <div className={`${styles.imageInput} ${styles.photo}`} style={{width: "300px"}}>
+                <div className={`${styles.imageInput} ${styles.itemContainer}`}>
                     <label htmlFor="file-upload">
                         <IconButton iconProps={{ iconName: 'Add' }} styles={{icon: {fontSize: "36px", color: "black"}}} onClick={handleIconClick}/>
                     </label>
@@ -207,9 +193,38 @@ const Film: React.FC<FilmProps> = ({ posts = []}) => {
                 </div>
             )}
             {posts.map((post, index) => (
-                <div key={index} className={styles.photo}>
+                <div key={index} className={styles.itemContainer}>
                     {post.type === 'image' && post.imageUrl && (
                         <Image src={post.imageUrl} alt="A related caption" width={200} height={300} />
+                    )}
+                    <Stack horizontal className={styles.caption}>
+                        <div>{post.city}</div>
+                        <div>{formatDate(post.date)}</div>
+                    </Stack>
+                </div>
+            ))}
+        </div>
+    ) : (
+        <div ref={stripContainerRef} className={`${styles.photoScrapbook} ${styles.filmstrip}`}>
+            {userEmail == "codysims190@gmail.com" && (
+                <div className={`${styles.imageInput} ${styles.itemContainer}`} style={{width: "300px"}}>
+                    <label htmlFor="file-upload">
+                        <IconButton iconProps={{ iconName: 'Add' }} styles={{icon: {fontSize: "36px", color: "black"}}} onClick={handleIconClick}/>
+                    </label>
+                    <input
+                        ref={fileInputRef}
+                        id="file-upload"
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
+                </div>
+            )}
+            {posts.map((post, index) => (
+                <div key={index} className={styles.itemContainer}>
+                    {post.type === 'image' && post.imageUrl && (
+                        <Image className={styles.photo} src={post.imageUrl} alt="A related caption" width={200} height={300} />
                     )}
                     <Stack horizontal className={styles.caption}>
                         <div>{post.city}</div>

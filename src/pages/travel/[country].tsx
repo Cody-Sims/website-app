@@ -230,20 +230,22 @@ export default function Country() {
                 />
             </Head>
             <h1>{country}</h1>
-            {imagePosts.length > 0 && <Film posts={imagePosts}/>}
+            {(userEmail === "codysims190@gmail.com" || imagePosts.length > 0) && <Film posts={imagePosts}/>}
             <div className={styles.container}>
                 <div className={styles.timelineContainer}>
-                    {userEmail === "codysims190@gmail.com" &&
-                        <Stack className={styles.containerEvent}>  
-                            <div className={styles.postEvent} style={{display:"flex", flexDirection: "column"}}>
-                                <textarea
-                                    ref={textareaRef}
-                                    className={styles.postEventInput}
-                                    value={postContent}
-                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {setPostContent(e.target.value); autoResizeTextarea();}}/>
-                                <button onClick={submitPost} className={styles.toggleButton}> Submit Post </button> 
-                            </div> 
+                    <div>
+                        {userEmail === "codysims190@gmail.com" &&
+                            <Stack className={styles.containerEvent}>  
+                                <div className={styles.postEvent} style={{display:"flex", flexDirection: "column"}}>
+                                    <textarea
+                                        ref={textareaRef}
+                                        className={styles.postEventInput}
+                                        value={postContent}
+                                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {setPostContent(e.target.value); autoResizeTextarea();}}/>
+                                    <button onClick={submitPost} className={styles.toggleButton}> Submit Post </button> 
+                                </div> 
                         </Stack>}
+                    </div>
                     <div className={styles.timelineLine}></div>
                     {Object.keys(groupedPosts).map((dateKey) => (
                         <div key={dateKey}>
@@ -253,13 +255,16 @@ export default function Country() {
                                     <div className={isImagePost(post) ? styles.imageEvent : styles.postEvent}>
                                         {post.imageUrl && (
                                            
+                                           <div className={styles.imageWrapper}>
                                                 <Image
                                                     src={post.imageUrl}
                                                     alt="Post"
-                                                    width={800} height={400} 
+                                                    width={800}
+                                                    height={400}
                                                     layout="responsive"
                                                     className={styles.imageContainer}
                                                 />
+                                            </div>
                                            
                                         )}
                                         {post.type === 'text' && (

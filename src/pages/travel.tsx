@@ -95,7 +95,10 @@ const Travel = ({ isLightMode }: TravelProps) => {
         ['United Kingdom', 1, 'Trips: 1'],
         ['Ireland', 1, 'Trips: 1'],
         ['Japan', 1, 'Trips: 1'],
-        ['Colombia', 1, 'Trips: 1']
+        ['Colombia', 1, 'Trips: 1'],
+        ['Peru', 1, 'Trips: 1'],
+        ['Argentina', 1, 'Trips: 1'],
+        ['Chile', 1, 'Trips: 1']
     ]);      
 
 

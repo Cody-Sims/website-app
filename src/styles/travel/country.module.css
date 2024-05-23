@@ -11,18 +11,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    min-width: 100vw;
 }
 
 .timelineContainer {
     justify-content: center;
+    align-items: center;
     position: relative;
     padding-left: 50px;
     margin: 24px 0;
-}
-
-.containerEvent {
-    max-width: 75%;
+    max-width: 50%;
 }
 
 .timelineLine {
@@ -34,22 +32,13 @@
     bottom: 0;
 }
 
-.imageEvent {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.imageEvent img {
-    box-shadow: 2px 2px 8px 4px var(--shadow-color);
-    border-radius: 3%;
-}
-
 
 .postEvent {
     position: relative;
     margin-bottom: 30px;
     box-shadow: 0 0 8px 4px var(--shadow-color);
-    max-width: 50vw;
+    min-width: 100%;
+    max-width: 100%;
     background-color: var(--foreground-color);
     margin-top: 12px;
     padding: 6px 6px 2px 18px;
@@ -82,6 +71,18 @@
     font-size: 24px;
 }
 
+.imageEvent {
+    position: relative;
+    margin-bottom: 30px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.imageEvent img {
+    box-shadow: 2px 2px 8px 4px var(--shadow-color);
+    border-radius: 3%;
+}
+
 .imageEvent:before{
     content: '';
     position: absolute;
@@ -94,8 +95,8 @@
 }
 
 .imageContainer {
-    max-width: 50vw; /* Fixed width */
-    height: auto; /* Natural height */
+    max-height: auto; /* Natural height */
+    max-width: 100%;
     margin-bottom: 10px;
 }
 
@@ -133,25 +134,19 @@
 
 /* Responsive Design for smaller screens */
 @media (max-width: 768px) {
+
     .containerEvent {
-        max-width: 95%;
-    }
-    
-    .imageContainer {
-        max-width: 90%; /* Full width on smaller screens */
+        max-width: 70vw;
     }
 
-    .containerEvent .postEvent{
-        width: 100%;
-    }
 
     .timelineContainer {
         padding-left: 40px; /* Adjust padding for smaller screens */
+        min-width: 90%;
+        max-width: 90%;
     }
 
-    .postEvent {
-        max-width: 80vw;
-    }
+
     .postEvent p {
         font-size: 16px;
     }
@@ -166,6 +161,7 @@
         width: 100%;
         font-size: 16px;
     }
+    
     .toggleButton {
         width: 40%;
         height: 24px;

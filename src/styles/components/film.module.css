@@ -27,13 +27,15 @@
     box-sizing: border-box;
     min-height: 375px;
 }
+
+
 .imageInput {
     display: flex;
     background-color: white;
     align-items: center;
     justify-content: center;
-    width: 300px;
 }
+
 .icon {
     color: black;
     min-width: 48px;
@@ -50,16 +52,14 @@
 
 }
 
-.photoScrapbook .photo {
+.itemContainer {
     position: relative; /* Position relative for absolute positioning of caption */
     flex: 0 0 auto;
-    width: auto; /* Set the width of each photo */
-    max-height: 50vh; /* Set the height of each photo */
     border: 5px solid #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.photoScrapbook .photo img {
+.photo {
     object-fit: contain;
     height: 350px;
     max-height: 350px;
@@ -91,8 +91,8 @@
         display: flex;
         overflow-x: auto; /* Enable horizontal scrolling */
         gap: 20px;
-    
     }
+   
 }
 
 @media only screen and (min-width: 768px) {
